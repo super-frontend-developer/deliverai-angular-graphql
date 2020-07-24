@@ -1,0 +1,73 @@
+:host {
+  .mobile-preview {
+    min-height: calc(100vh - 75px);
+    .button-group {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modifier-item {
+      background-color: #f6f7fb;
+      border: 1px solid #d8d8d8;
+    }
+  }
+
+  .disabled-catalog-product {
+    background-color: #a3a3a3;
+    opacity: 0.5;
+
+    pointer-events: none;
+  }
+}
+
+.drag-list {
+  min-height: 10px;
+  overflow: hidden;
+}
+
+.empty-box {
+  display: block;
+}
+
+.drag-box {
+  cursor: move;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.drag-box:last-child {
+  border: 0;
+}
+
+.drag-list.cdk-drop-list-dragging .drag-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.loading-spinner {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, -50%);
+}
+
+.backdrop {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}

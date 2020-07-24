@@ -1,0 +1,34 @@
+<header class="d-block d-sm-block d-md-none">
+  <div class="d-flex align-items-center justify-content-between h-100">
+    <h1>Business</h1>
+  </div>
+</header>
+
+<div class="d-md-flex d-sm-none d-none">
+  <div style="width: 100%;">
+    <header>
+      <div class="d-flex align-items-center">
+        <h1>Business</h1>
+      </div>
+    </header>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="card-deck-container">
+    <mat-card class="d-flex justify-content-center align-items-center mr-md-2 adding-card">
+      <mat-card-content class="text-center">
+        <a [routerLink]="['create']" mat-icon-button>
+          <mat-icon class="mr-2" style="color: #1c2a6b; font-size: 40px;">add_circle</mat-icon>
+        </a>
+        <div class="mt-3">
+          <span style="color: #1c2a6b; font-size: 19px;">Add Business</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <div fxFlex *ngFor="let business of businessList" class="card-item pr-md-2">
+      <app-business-card [business]="business"></app-business-card>
+    </div>
+  </div>
+</div>
+

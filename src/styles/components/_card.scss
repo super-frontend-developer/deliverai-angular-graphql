@@ -1,0 +1,34 @@
+.general-card {
+  width: 210px;
+  height: 300px;
+}
+
+.action-button-group {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.company-name {
+  display: block;
+
+  font-size: 16px;
+  text-align: left;
+}
+
+.company-address {
+  display: block;
+
+  color: #808080;
+  font-size: 12px;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .general-card {
+    width: 100%;
+  }
+}

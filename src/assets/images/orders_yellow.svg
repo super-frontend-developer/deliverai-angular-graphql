@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>orders</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-27.9%" y="-29.3%" width="155.8%" height="158.5%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.11372549   0 0 0 0 0.168627451   0 0 0 0 0.419607843  0 0 0 1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Catalog" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="create-menu" transform="translate(-14.000000, -173.000000)">
+            <g id="orders" transform="translate(13.000000, 174.000000)">
+                <g id="Live-orders">
+                    <g id="ic_event" filter="url(#filter-1)">
+                        <polygon id="Bounds" points="0 0 43 0 43 41 0 41"></polygon>
+                        <path d="M20.8888889,3.2 L11.1111111,3.2 L11.1111111,1 L8.66666667,1 L8.66666667,3.2 L7.44444444,3.2 C6.08777778,3.2 5.01222222,4.19 5.01222222,5.4 L5,20.8 C5,22.01 6.08777778,23 7.44444444,23 L24.5555556,23 C25.9,23 27,22.01 27,20.8 L27,13.4666667 L27,5.4 C27,4.19 25.9,3.2 24.5555556,3.2 L23.3333333,3.2 L23.3333333,1 L20.8888889,1 L20.8888889,3.2 Z" id="Shape" fill="#F5A623"></path>
+                    </g>
+                </g>
+                <polygon id="check-icon" fill="#1B2969" points="10 13.6557641 13.8721653 17.5371709 21.431667 9.95918626 19.4724807 8 13.8629239 13.6095569 11.9591863 11.6965778"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,64 @@
+################################################################################
+##                                                                            ##
+##                                  MUTATION                                  ##
+##                                                                            ##
+################################################################################
+
+extend type Mutation {
+    """Create shape delivery zone area."""
+    createShapeDeliveryZoneArea(input: CreateShapeDeliveryZoneAreaInput!): ShapeDeliveryZoneArea!
+
+    """Update shape delivery zone area."""
+    updateShapeDeliveryZoneArea(input: UpdateShapeDeliveryZoneAreaInput!): ShapeDeliveryZoneArea!
+
+    """Delete shape delivery zone area."""
+    deleteShapeDeliveryZoneArea(input: DeleteShapeDeliveryZoneAreaInput!): Boolean!
+}
+
+################################################################################
+##                                                                            ##
+##                                   TYPES                                    ##
+##                                                                            ##
+################################################################################
+
+"""Shape delivery zone area."""
+type ShapeDeliveryZoneArea implements Node & DeliveryZoneArea {
+    """ID."""
+    id: ID!
+
+    """Delivery zone."""
+    deliveryZone: DeliveryZone!
+
+    """Points forming the shape geo area."""
+    points: [LatLng!]!
+}
+
+################################################################################
+##                                                                            ##
+##                                   INPUTS                                   ##
+##                                                                            ##
+################################################################################
+
+"""Create shape delivery zone area input."""
+input CreateShapeDeliveryZoneAreaInput {
+    """ID of the delivery zone."""
+    deliveryZone: ID!
+
+    """Points forming the shape."""
+    points: [SetLatLngInput!]!
+}
+
+"""Update shape delivery zone area input."""
+input UpdateShapeDeliveryZoneAreaInput {
+    """ID."""
+    id: ID!
+
+    """Points forming the shape."""
+    points: [SetLatLngInput!]!
+}
+
+"""Delete shape delivery zone area input."""
+input DeleteShapeDeliveryZoneAreaInput {
+    """ID."""
+    id: ID!
+}

@@ -1,0 +1,13 @@
+:host {
+  @media (max-width: 992px) {
+    .store-details-content {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .store-details-content {
+      width: 600px;
+    }
+  }
+}

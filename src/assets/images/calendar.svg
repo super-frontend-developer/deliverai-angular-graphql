@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="23px" viewBox="0 0 21 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_event</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Dashboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-303.000000, -20.000000)" id="ic_event">
+            <g transform="translate(300.000000, 19.000000)">
+                <polygon id="Bounds" points="0.482758621 0 27.5172414 0 27.5172414 28 0.482758621 28"></polygon>
+                <path d="M19.1494253,13.65 L13.5172414,13.65 L13.5172414,19.4 L19.1494253,19.4 L19.1494253,13.65 L19.1494253,13.65 Z M18.0229885,1 L18.0229885,3.3 L9.01149425,3.3 L9.01149425,1 L6.75862069,1 L6.75862069,3.3 L5.63218391,3.3 C4.38183908,3.3 3.39057471,4.335 3.39057471,5.6 L3.37931034,21.7 C3.37931034,22.965 4.38183908,24 5.63218391,24 L21.4022989,24 C22.6413793,24 23.6551724,22.965 23.6551724,21.7 L23.6551724,5.6 C23.6551724,4.335 22.6413793,3.3 21.4022989,3.3 L20.2758621,3.3 L20.2758621,1 L18.0229885,1 L18.0229885,1 Z M21.4022989,21.7 L5.63218391,21.7 L5.63218391,9.05 L21.4022989,9.05 L21.4022989,21.7 L21.4022989,21.7 Z" id="Shape" fill="#1C2B6E"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,42 @@
+<div class="d-md-block d-sm-none d-none">
+  <div class="text-warning mt-2">Store</div>
+  <div class="navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{selectedBusinessStore}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a *ngFor="let business of businessList">
+            <span class="dropdown-item cursor-pointer" (click)="selectBusiness(business)">{{business.node.business.name}}</span>
+            <ul *ngIf="business.node.business.storeConnection.edges.length > 0" class="sub-menu" role="sub-menu" aria-labelledby="sub-menu">
+              <li *ngFor="let store of business.node.business.storeConnection.edges" class="dropdown-item cursor-pointer" (click)="selectStore(store, business)" style="padding-left: 35px;"><a role="menuitem" tabindex="-1">{{store.node.name}}</a></li>
+            </ul>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="d-block d-sm-block d-md-none">
+  <div class="dropdown btn-group align-items-center" ngbDropdown>
+    <span class="text-white"><i class="fas fa-store"></i></span>
+    <div class="navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a *ngFor="let business of businessList">
+              <span class="dropdown-item cursor-pointer" (click)="selectBusiness(business)">{{business.node.business.name}}</span>
+              <ul *ngIf="business.node.business.storeConnection.edges.length > 0" class="sub-menu" role="sub-menu" aria-labelledby="sub-menu">
+                <li *ngFor="let store of business.node.business.storeConnection.edges" class="dropdown-item cursor-pointer" (click)="selectStore(store, business)" style="padding-left: 35px;"><a role="menuitem" tabindex="-1">{{store.node.name}}</a></li>
+              </ul>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

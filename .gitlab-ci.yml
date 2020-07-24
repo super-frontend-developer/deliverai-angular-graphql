@@ -1,0 +1,82 @@
+image: node:latest
+
+workflow:
+    rules:
+        # Skip pipeline after release commit. It leads to infinite cycles.
+        -   if: '$CI_COMMIT_MESSAGE =~ /^chore\(release\)\:[ ]+[0-9]+\.[0-9]+\.[0-9]+/'
+            when: never
+        -   when: always
+
+variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    CI_DEBUG_TRACE: 'false'
+
+before_script:
+    # Update packages
+    - apt-get update -qq && apt-get install
+    # Load git modules
+    - git submodule sync --recursive
+    - git submodule update --init --recursive
+    # Docker login asks for the password to be passed through stdin for security
+    # we use $CI_JOB_TOKEN here which is a special token provided by GitLab
+    - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+
+stages:
+    - build
+    - release
+
+.abstract-node-job:
+    cache: &abstract_node_job_cache
+        key: ${CI_COMMIT_REF_NAME}-node
+        paths:
+            - node_modules/
+            - .yarn
+    before_script: &abstract_node_job_before_script
+        - yarn config set cache-folder .yarn
+        - yarn install --frozen-lockfile
+
+"Build":
+    stage: build
+    cache:
+        <<: *abstract_node_job_cache
+    before_script: *abstract_node_job_before_script
+    script:
+        - yarn lint
+        - yarn build:prod
+    artifacts:
+        paths:
+            - ${CI_PROJECT_DIR}/dist/deliverai-frontend-web-dashboard/
+            - ${CI_PROJECT_DIR}/package.json
+        when: on_success
+        expire_in: 2 weeks
+    only:
+        refs:
+            - master
+            - merge_requests
+        variables:
+            - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /|master|develop/
+    except:
+        refs:
+            - tags
+
+"Release":
+    stage: release
+    dependencies:
+        - "Build"
+    cache:
+        <<: *abstract_node_job_cache
+    before_script:
+        - *abstract_node_job_before_script
+        - git config user.name "DeliverAI Bot"
+        - git config user.email "bot@deliverai.io"
+    script:
+        - git checkout -b ${CI_COMMIT_REF_NAME}
+        - git remote rm origin
+        - git remote add origin https://${RELEASE_IT_USER}:${RELEASE_IT_TOKEN}@gitlab.com/deliverai.io/frontend/web/dashboard.git
+        - yarn release --patch --ci --verbose
+    only:
+        refs:
+            - master
+    except:
+        refs:
+            - tags

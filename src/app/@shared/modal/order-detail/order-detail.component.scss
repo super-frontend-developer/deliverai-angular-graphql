@@ -1,0 +1,10 @@
+:host {
+  .close-button {
+    outline: none;
+
+    span:focus,
+    span {
+      outline: none;
+    }
+  }
+}

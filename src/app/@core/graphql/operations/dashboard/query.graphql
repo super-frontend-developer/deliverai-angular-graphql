@@ -1,0 +1,65 @@
+query metricTotalCustomers (
+    $business: ID
+    $from: DateTime!
+    $to: DateTime
+) {
+    metricTotalCustomers(
+        business: $business
+        from: $from
+        to: $to
+    ) {
+        dateTime
+        value
+    }
+}
+
+query metricRevenue (
+    $business: ID
+    $store: ID
+    $from: DateTime!
+    $to: DateTime
+) {
+    metricRevenue(
+        business: $business
+        store: $store
+        from: $from
+        to: $to
+    ) {
+        dateTime
+        value
+    }
+}
+
+query metricTotalOrders (
+    $business: ID
+    $store: ID
+    $from: DateTime!
+    $to: DateTime
+) {
+    metricTotalOrders(
+        business: $business
+        store: $store
+        from: $from
+        to: $to
+    ) {
+        dateTime
+        value
+    }
+}
+
+query metricAvgOrderAmount (
+    $business: ID
+    $store: ID
+    $from: DateTime!
+    $to: DateTime
+) {
+    metricAvgOrderAmount(
+        business: $business
+        store: $store
+        from: $from
+        to: $to
+    ) {
+        dateTime
+        value
+    }
+}

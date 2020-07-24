@@ -1,0 +1,63 @@
+<header class=" flex-wrap">
+  <h1 class="mr-4 mb-1">Create Item</h1>
+</header>
+
+<div class="main-content">
+  <div class="mat-elevation-z8 pt-4 item-content">
+    <div class="row">
+      <div class="col-md-7 col-sm-12">
+        <div class="text-center">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="type" [(ngModel)]="type">
+            <label class="btn-outline-primary shadow-none" ngbButtonLabel>
+              <input type="radio" ngbButton value="Item"> Item
+            </label>
+            <label class="btn-outline-primary shadow-none" ngbButtonLabel>
+              <input type="radio" ngbButton value="Modifier"> Modifier
+            </label>
+          </div>
+        </div>
+        <form [formGroup]="createItemForm">
+          <input type="hidden" class="form-control" formControlName="id" name="id" id="id">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" formControlName="name" name="name" id="name">
+          </div>
+          <div class="row">
+            <div class="form-group col-7">
+              <label>Price</label>
+              <input type="text" class="form-control" formControlName="price" name="price" id="price">
+            </div>
+            <div class="form-group col-5">
+              <label style="height: 13px;"></label>
+              <select class="form-control" formControlName="currency" name="currency">
+                <option value="">Select</option>
+                <option *ngFor="let item of currencyList" [value]="item.code">{{item.symbol}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea formControlName="description" name="description" style="width: 100%; height: 150px;">
+            </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-5 col-sm-12">
+        <div class="file-drop-area">
+          <input class="file-input" type="file" accept=".png, .jpg, .gif">
+          <img src="assets/images/Item-upload.svg" style="width: 100%;">
+        </div>
+        <div class="text-center">
+          <span class="pb-2 text-secondary">PNG, JPG, SVG, GIF max file size 2 Mb.</span>
+          <span class="text-secondary">White or transparent background.</span>
+        </div>
+      </div>
+    </div>
+    <div class="divider-el mt-3 mt-md-0"></div>
+    <div class="button-group ">
+      <button class="btn" style="color: #3647c9;" (click)="cancel()">Cancel</button>
+      <button class="btn btn-warning text-white" (click)="save()">Save</button>
+    </div>
+  </div>
+</div>
+

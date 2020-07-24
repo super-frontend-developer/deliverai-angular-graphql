@@ -1,0 +1,108 @@
+<header class="d-block d-sm-block d-md-none">
+  <div class="d-flex align-items-center justify-content-between h-100">
+    <h1>Order History</h1>
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</header>
+
+<div class="d-md-flex d-sm-none d-none">
+  <div style="width: 90%;">
+    <header>
+      <div class="d-flex align-items-center">
+        <h1>Order History</h1>
+      </div>
+    </header>
+  </div>
+
+  <div class="d-flex align-items-center pl-2" style="width: 10%; border-bottom: solid #d8d8d8 1px; border-left: solid #d8d8d8 1px;">
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</div>
+
+<div class="main-content">
+
+  <div class="general-box mb-4">
+    <form>
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <select class="form-control">
+            <option selected>Order Status</option>
+            <option value="1">Accepted</option>
+            <option value="2">Rejected</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-3">
+          <div class="d-flex align-items-center">
+            <img class="d-sm-block d-none mr-3" src="assets/images/calendar.svg" alt="">
+            <select class="form-control">
+              <option selected>Current Month</option>
+              <option value="1">Last Month</option>
+              <option value="2">Current Year</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group col-sm-3">
+          <select class="form-control">
+            <option selected>Order Type</option>
+            <option value="1">Pick-up</option>
+            <option value="2">Delivery</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-3">
+          <select class="form-control">
+            <option selected>Channel Type</option>
+            <option value="1">Facebook</option>
+            <option value="2">Channel 1</option>
+            <option value="3">Channel 2</option>
+            <option value="4">Channel 3</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table general-box order-list">
+      <thead>
+      <tr>
+        <th class="text-nowrap">ID</th>
+        <th class="text-nowrap">DATE</th>
+        <th class="text-nowrap">STATUS</th>
+        <th class="text-nowrap">CUSTOMER</th>
+        <th class="text-nowrap">PHONE NUMBER</th>
+        <th class="text-nowrap">TYPE</th>
+        <th class="text-nowrap">PAYMENT</th>
+        <th class="text-nowrap">TOTAL PRICE</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngIf="loadingOrders">
+          <td colspan="8">
+            <mat-progress-spinner class="mt-2" mode="indeterminate" diameter="30" style="position: relative; left: 50%; right: 50%">
+            </mat-progress-spinner>
+          </td>
+        </tr>
+        <tr *ngIf="!loadingOrders && orderHistory.length === 0">
+          <td colspan="8" class="text-center">
+            <span>No orders data</span>
+          </td>
+        </tr>
+      <tr *ngFor="let item of orderHistory">
+        <td class="text-nowrap text-black-50">#{{item.node.id}}</td>
+        <td class="text-nowrap">{{ item.node.createdAt | date }}</td>
+        <td class="text-nowrap">{{item.node.fulfillment.state}}</td>
+        <td class="text-nowrap">{{item.node.customerName}}</td>
+        <td class="text-nowrap">+{{item.node.customer.phoneNumber.countryCode}} {{item.node.customer.phoneNumber.nationalNumber}}</td>
+        <td class="text-nowrap text-danger">{{getOrderType(item.node.delivery.__typename)}}</td>
+        <td class="text-nowrap text-success">{{item.node.payment.type}}</td>
+        <td class="text-nowrap">{{item.node.payment.currency.code}} {{item.node.payment.amount}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="40" [page]="1" aria-label="Default pagination"></ngb-pagination>
+  </div>
+</div>

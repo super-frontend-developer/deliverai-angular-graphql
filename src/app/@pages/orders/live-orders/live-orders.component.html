@@ -1,0 +1,217 @@
+<header class="d-block d-sm-block d-md-none">
+  <div class="d-flex align-items-center justify-content-between h-100">
+    <h1>Live Orders</h1>
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</header>
+
+<div class="d-md-flex d-sm-none d-none">
+  <div style="width: 90%;">
+    <header>
+      <h1>Live Orders</h1>
+    </header>
+  </div>
+
+  <div class="d-flex align-items-center pl-2" style="width: 10%; border-bottom: solid #d8d8d8 1px; border-left: solid #d8d8d8 1px;">
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</div>
+
+<div class="flex-grow-1 d-flex align-items-stretch">
+  <div class="main-content flex-grow-1">
+
+    <div class="order-statuses mb-4">
+
+      <a [routerLink]="null" class="d-flex justify-content-center align-items-center text-secondary py-3" [class.order-statuses--active]="selectedOrderTab !== null && orderFlow !== null && selectedOrderTab.id === orderFlow.inputQueue.id" (click)="selectOrderTab(orderFlow.inputQueue)">
+        <div class="mark-order mark-order__new"><span *ngIf="orderFlow">{{orderFlow.inputQueue.orderConnection.totalCount}}</span></div>
+        <div class="d-none d-lg-block mt-1">New orders</div>
+      </a>
+      <a [routerLink]="null" class="d-flex justify-content-center align-items-center text-secondary py-3" [class.order-statuses--active]="selectedOrderTab !== null && orderFlow !== null && selectedOrderTab.id === orderFlow.intermediateQueues[0].id" (click)="selectOrderTab(orderFlow.intermediateQueues[0])">
+        <div class="mark-order mark-order__progress"><span *ngIf="orderFlow">{{orderFlow.intermediateQueues[0].orderConnection.totalCount}}</span></div>
+        <div class="d-none d-lg-block mt-1">In progress</div>
+      </a>
+      <a [routerLink]="null" class="d-flex justify-content-center align-items-center text-secondary py-3" [class.order-statuses--active]="selectedOrderTab !== null && orderFlow !== null && selectedOrderTab.id === orderFlow.intermediateQueues[1].id" (click)="selectOrderTab(orderFlow.intermediateQueues[1])">
+        <div class="mark-order mark-order__ready"><span *ngIf="orderFlow">{{orderFlow.intermediateQueues[1].orderConnection.totalCount}}</span></div>
+        <div class="d-none d-lg-block mt-1">Ready for pickup</div>
+      </a>
+      <a [routerLink]="null" class="d-flex justify-content-center align-items-center text-secondary py-3" [class.order-statuses--active]="selectedOrderTab !== null && orderFlow !== null && selectedOrderTab.id === orderFlow.intermediateQueues[2].id" (click)="selectOrderTab(orderFlow.intermediateQueues[2])">
+        <div class="mark-order mark-order__delivery"><span *ngIf="orderFlow">{{orderFlow.intermediateQueues[2].orderConnection.totalCount}}</span></div>
+        <div class="d-none d-lg-block mt-1">In delivery</div>
+      </a>
+      <a [routerLink]="null" class="d-flex justify-content-center align-items-center text-secondary py-3" [class.order-statuses--active]="selectedOrderTab !== null && orderFlow !== null && selectedOrderTab.id === orderFlow.outputQueue.id" (click)="selectOrderTab(orderFlow.outputQueue)">
+        <div class="mark-order mark-order__completed"><span *ngIf="orderFlow">{{orderFlow.outputQueue.orderConnection.totalCount}}</span></div>
+        <div class="d-none d-lg-block mt-1">Completed</div>
+      </a>
+    </div>
+
+    <h5 class="mb-2 text-secondary d-lg-none">New orders</h5>
+
+    <table class="table general-box order-list">
+      <thead>
+      <tr>
+        <th class="d-none d-lg-table-cell">ID</th>
+        <th class="d-none d-lg-table-cell">CUSTOMER</th>
+        <th class="d-none d-lg-table-cell">DELIVERY ADDRESS</th>
+        <th class="d-lg-none">CUSTOMER</th>
+        <th class="d-none d-lg-table-cell">MODE</th>
+        <th class="d-none d-lg-table-cell">COST</th>
+        <th class="d-lg-none">INFO</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="loadingOrders">
+          <td colspan="5">
+            <mat-progress-spinner class="mt-2" mode="indeterminate" diameter="30" style="position: relative; left: 50%; right: 50%">
+            </mat-progress-spinner>
+          </td>
+        </tr>
+        <tr *ngIf="!loadingOrders && filteredLiveOrders.length === 0">
+          <td colspan="5" class="text-center">
+            <span>No orders data</span>
+          </td>
+        </tr>
+
+        <tr *ngFor="let order of filteredLiveOrders" (click)="openOrderDetail(order)" [ngClass]="{'highlight' : order.node.id === selectedOrder.node.id}">
+          <td class="d-none d-lg-table-cell">#{{order.node.id}}</td>
+          <td class="d-none d-lg-table-cell">{{order.node.customerName}}</td>
+          <td *ngIf="getOrderType(order.node.delivery.__typename) === 'Pickup'" class="d-none d-lg-table-cell text-danger">{{order.node.delivery.store.address.addressLine1}}</td>
+          <td *ngIf="getOrderType(order.node.delivery.__typename) === 'Courier'" class="d-none d-lg-table-cell text-danger">{{order.node.delivery.address.addressLine1}}</td>
+          <td class="d-lg-none">
+            <div class="text-black-50 mb-1">#{{order.node.id}}</div>
+            <div class="mb-1">{{order.node.customerName}}</div>
+            <div *ngIf="getOrderType(order.node.delivery.__typename) === 'Pickup'" class="text-danger mb-1">{{store.address.addressLine1}} {{store.address.city}} {{store.address.country}}</div>
+            <div *ngIf="getOrderType(order.node.delivery.__typename) === 'Courier'" class="text-danger mb-1">{{order.node.delivery.address.addressLine1}}</div>
+          </td>
+          <td class="d-none d-lg-table-cell text-success">{{getOrderType(order.node.delivery.__typename)}}</td>
+          <td class="d-none d-lg-table-cell text-nowrap">{{order.node.payment.currency.code}} {{order.node.payment.amount}}</td>
+          <td class="d-lg-none text-nowrap">
+            <div class="text-success">{{getOrderType(order.node.delivery.__typename)}}</div>
+            <br>{{order.node.payment.currency.code}} {{order.node.payment.amount}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="selectedOrder && isOpenOrderDetail" class="active-order d-none d-md-block">
+
+    <div class="active-order__time">
+      <!-- <i class="fas fa-clock" style="color: #fff !important;"></i> 5 minutes ago -->
+      Order Details
+    </div>
+
+    <table class="table table-borderless active-order__table">
+      <tbody>
+      <tr class="active-order__table--underlined">
+        <td class="active-order__property">Order Id:</td><td>#{{selectedOrder.node.id}}</td><td class="text-right"><span class="active-order__property">Cost:</span> {{selectedOrder.node.payment.amount}} {{selectedOrder.node.payment.currency.code}}</td>
+      </tr>
+
+      <tr>
+        <td class="active-order__property">Date:</td>
+        <td class="active-order__property" colspan="2">{{ selectedOrder.node.createdAt | date }}</td>
+      </tr>
+
+      <tr>
+        <td class="active-order__property">Name:</td>
+        <td colspan="2">{{getCustomersNames(selectedOrder.node.customer.names)}}</td>
+      </tr>
+
+      <tr>
+        <td class="active-order__property">Phone:</td>
+        <td colspan="2">+{{selectedOrder.node.customer.phoneNumber.countryCode}} {{selectedOrder.node.customer.phoneNumber.nationalNumber}}</td>
+      </tr>
+
+      <tr>
+        <td class="active-order__property">Address:</td>
+        <td colspan="2" *ngIf="getOrderType(selectedOrder.node.delivery.__typename) === 'Pickup'">{{store.address.addressLine1}} {{store.address.city}} {{store.address.country}}</td>
+        <td colspan="2" *ngIf="getOrderType(selectedOrder.node.delivery.__typename) === 'Courier'">{{selectedOrder.node.delivery.address.addressLine1}}</td>
+      </tr>
+
+      <tr>
+        <td class="active-order__property">Delivery:</td>
+        <td colspan="2">{{getOrderType(selectedOrder.node.delivery.__typename)}}</td>
+      </tr>
+
+      <tr>
+        <td class="active-order__property">Payment:</td>
+        <td colspan="2">{{selectedOrder.node.payment.type}} | {{getPaymentState(selectedOrder.node.payment.state)}}</td>
+      </tr>
+
+      <tr class="active-order__table--underlined">
+        <td class="active-order__property">Delivery Fees:</td>
+        <td colspan="2">{{selectedOrder.node.delivery.fee}} {{selectedOrder.node.payment.currency.code}}</td>
+      </tr>
+
+      <tr *ngIf="selectedOrder.node.comment" class="active-order__table--underlined">
+        <td class="active-order__property">Comment:</td>
+        <td colspan="2">{{selectedOrder.node.comment}}</td>
+      </tr>
+
+      <tr class="active-order__table--underlined">
+        <td class="active-order__property" colspan="3">Ordered items:</td>
+      </tr>
+
+      <tr class="active-order__table--underlined" *ngFor="let product of selectedOrder.node.productConnection.edges let i = index">
+        <td colspan="3">
+          <div class="active-order__item">
+            <div class="active-order__item_name">{{i+1}}) {{product.node.quantity}} X {{product.node.name}}</div>
+            <div class="active-order__item_price">{{product.node.price * product.node.quantity}} {{selectedOrder.node.payment.currency.code}}</div>
+          </div>
+          <div class="active-order__item">
+            <div class="active-order__item_name pl-3">Addons:</div>
+          </div>
+          <div *ngFor="let modifier of product.node.modifierConnection.edges">
+            <div  class="active-order__item" *ngFor="let addon of modifier.node.optionConnection.edges">
+              <div class="pl-4 active-order__item_name">{{addon.node.quantity}} X {{addon.node.name}}</div>
+              <div class="active-order__item_price">{{addon.node.price * addon.node.quantity}} {{selectedOrder.node.payment.currency.code}}</div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr class="active-order__table--underlined">
+        <td colspan="3">
+          <div [ngSwitch]="selectedOrderTab.name">
+            <div class="d-flex" *ngSwitchCase="'New orders'">
+              <button class="btn btn-outline-danger flex-grow-1 mr-1" (click)="cancelOrder(cancelOrderModal, selectedOrder)">Reject</button>
+              <button class="btn btn-success flex-grow-1 ml-1" (click)="moveOrder(selectedOrder)">Accept</button>
+            </div>
+            <div class="d-flex" *ngSwitchCase="'In progress'">
+              <button class="btn btn-success flex-grow-1 ml-1" (click)="moveOrder(selectedOrder)">Ready</button>
+            </div>
+            <div class="d-flex" *ngSwitchCase="'Ready for pickup'">
+              <button class="btn btn-success flex-grow-1 ml-1" (click)="moveOrder(selectedOrder)">Deliver</button>
+            </div>
+            <div class="d-flex" *ngSwitchCase="'In delivery'">
+              <button class="btn btn-success flex-grow-1 ml-1" (click)="moveOrder(selectedOrder)">Delivered</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+<ng-template #cancelOrderModal let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="modal-body">
+    <div class="text-center"><h4>Are you sure about cancelling order?</h4></div>
+    <form [formGroup]="cancelOrderForm">
+      <label class="d-block mt-4 mb-4">
+        <div class="form-label mb-1">Comment</div>
+        <input type="text" name="comment" class="form-control" formControlName="comment">
+      </label>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close('cancel')" style="width: 100px;">Cancel</button>
+    <button type="submit" class="btn btn-success" (click)="modal.close('okay')" style="width: 100px;">Yes</button>
+  </div>
+</ng-template>
+
+

@@ -1,0 +1,14 @@
+.dropdown-menu {
+  right: 0;
+  left: auto !important;
+}
+
+@media (max-width: 768px) {
+  .dropdown-toggle::after {
+    margin-top: 5px;
+    margin-left: 5px;
+
+    color: #ffffff;
+    font-size: 20px;
+  }
+}

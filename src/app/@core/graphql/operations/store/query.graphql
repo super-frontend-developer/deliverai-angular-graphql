@@ -1,0 +1,255 @@
+query StoreLookupById(
+    $id: ID!
+) {
+    store(id: $id) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        address {
+            id
+            country
+            city
+            addressLine1
+            addressLine2
+        }
+        timeZone {
+            id
+            displayName
+            observesDaylightTime
+        }
+        image
+        deliveryEnabled
+        pickupEnabled
+        deliveryEta
+        pickupEta
+        workingHours(daysOfTheWeek: []) {
+            dayOfWeek
+      		timePeriods {
+                from
+                to
+            }
+        }
+        deliveryHours(daysOfTheWeek: []) {
+            dayOfWeek
+      		timePeriods {
+                from
+                to
+            }
+        }
+        pickupHours(daysOfTheWeek: []) {
+            dayOfWeek
+      		timePeriods {
+                from
+                to
+            }
+        }
+        assignmentConnection {
+            edges {
+                node {
+                    user {
+                        name {
+                            given
+                            family
+                        }
+                        email
+                        avatar
+                    }
+                    roles
+                }
+            }
+        }
+        createdAt
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+    }
+}
+
+query StoreDeliveryZoneConnection(
+    $id: ID!
+) {
+    store(id: $id) {
+        deliveryZoneConnection {
+            edges {
+                node {
+                    id
+                    name
+                    minimalAmount
+                    fee
+                    areaConnection {
+                        edges {
+                            node {
+                                ... on CircleDeliveryZoneArea {
+                                    id
+                                    center {
+                                        latitude
+                                        longitude
+                                    }
+                                    corner {
+                                        latitude
+                                        longitude
+                                    }
+                                }
+                                ... on ShapeDeliveryZoneArea {
+                                    id
+                                    points {
+                                        latitude
+                                        longitude
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+query StoreConnection(
+    $business: ID!,
+
+    $first: PositiveInt,
+    $after: RelayCursor,
+
+    $last: PositiveInt,
+    $before: RelayCursor,
+
+    $offset: NonNegativeInt,
+    $limit: PositiveInt
+) {
+    storeConnection(
+        business: $business,
+
+        first: $first,
+        after: $after,
+
+        last: $last,
+        before: $before,
+
+        offset: $offset,
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                name
+                description {
+                    longContent
+                    shortContent
+                }
+                address {
+                    city
+                    addressLine1
+                    addressLine2
+                }
+                timeZone {
+                    id
+                    displayName
+                    observesDaylightTime
+                    offset
+                }
+                createdAt
+                createdBy {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                }
+            }
+            cursor
+        }
+        pageInfo {
+            startCursor
+            hasNextPage
+            endCursor
+            hasPreviousPage
+        }
+        totalCount
+    }
+}
+
+query DeliveryZoneConnection(
+    $business: ID,
+    $store: ID,
+
+    $first: PositiveInt,
+    $after: RelayCursor,
+
+    $last: PositiveInt,
+    $before: RelayCursor,
+
+    $offset: NonNegativeInt,
+    $limit: PositiveInt
+) {
+    deliveryZoneConnection(
+        business: $business,
+        store: $store,
+
+        first: $first,
+        after: $after,
+
+        last: $last,
+        before: $before,
+
+        offset: $offset,
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                name
+                minimalAmount
+                fee
+                areaConnection {
+                    edges {
+                        node {
+                            ... on CircleDeliveryZoneArea {
+                                id
+                                center {
+                                    latitude
+                                    longitude
+                                }
+                                corner {
+                                    latitude
+                                    longitude
+                                }
+                            }
+                            ... on ShapeDeliveryZoneArea {
+                                id
+                                points {
+                                    latitude
+                                    longitude
+                                }
+                            }
+                        }
+                    }
+                }
+                createdAt
+                createdBy {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                }
+            }
+            cursor
+        }
+        pageInfo {
+            startCursor
+            hasNextPage
+            endCursor
+            hasPreviousPage
+        }
+        totalCount
+    }
+}

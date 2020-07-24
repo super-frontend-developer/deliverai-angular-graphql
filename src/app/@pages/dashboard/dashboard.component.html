@@ -1,0 +1,163 @@
+<header class="d-block d-sm-block d-md-none">
+  <div class="d-flex align-items-center justify-content-between h-100">
+    <h1>Dashboard</h1>
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</header>
+
+<div class="d-md-flex d-sm-none d-none">
+  <div style="width: 90%;">
+    <header>
+      <div class="d-flex align-items-center">
+        <h1>Dashboard</h1>
+        <div class="date-select">
+          <ng-container *ngTemplateOutlet="dateSelector"></ng-container>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="d-flex align-items-center pl-2" style="width: 10%; border-bottom: solid #d8d8d8 1px; border-left: solid #d8d8d8 1px;">
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+
+</div>
+
+<div class="main-content">
+  <div class="mobile-date-select">
+    <ng-container *ngTemplateOutlet="dateSelector"></ng-container>
+  </div>
+  <div class="row">
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+      <div class="card-content bg-white">
+        <div class="card-header bg-white">
+          <h5 class="text-center text-primary">Total Orders</h5>
+        </div>
+        <div class="card-body text-center justify-content-center d-flex
+          flex-column">
+          <h5 class="text-primary">{{totalOrders}}</h5>
+          <span>Orders Completed</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+      <div class="card-content bg-white">
+        <div class="card-header bg-white">
+          <h5 class="text-center text-primary">Total Sales</h5>
+        </div>
+        <div class="card-body text-center justify-content-center d-flex
+          flex-column">
+          <h5 class="text-primary">{{currency}} {{totalSales}}</h5>
+          <span>Sales</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+      <div class="card-content bg-white">
+        <div class="card-header bg-white">
+          <h5 class="text-center text-primary">Total Customers</h5>
+        </div>
+        <div class="card-body text-center justify-content-center d-flex
+          flex-column">
+          <h5 class="text-primary">{{totalCustomers}}</h5>
+          <span>Customers</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+      <div class="card-content bg-white">
+        <div class="card-header bg-white">
+          <h5 class="text-center text-primary">Avg. Basket Value</h5>
+        </div>
+        <div class="card-body text-center justify-content-center d-flex
+          flex-column">
+          <h5 class="text-primary">{{currency}} {{totalBasketAmount}}</h5>
+          <span>Avg. Basket Value</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <div class="card-content bg-white">
+        <div class="card-body">
+          <div class="card-block">
+            <div class="height-400">
+              <canvas #generalCanvas height="300" baseChart
+                class="chart" [datasets]="ordersChartData"
+                [labels]="orderChartLabels" [options]="ordersChartOptions"
+                [colors]="areaChartColors"
+                [legend]="areaChartLegend" [chartType]="areaChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <div class="card-content bg-white">
+        <div class="card-body">
+          <div class="card-block">
+            <div class="height-400">
+              <canvas #generalCanvas height="300" baseChart class="chart"
+                [datasets]="salesChartData" [labels]="salesChartLabels"
+                [options]="salesChartOptions" [colors]="areaChartColors"
+                [legend]="areaChartLegend" [chartType]="areaChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <div class="card-content bg-white">
+        <div class="card-body">
+          <div class="card-block">
+            <div class="height-400">
+              <canvas #generalCanvas height="300" baseChart class="chart"
+                [datasets]="customersChartData" [labels]="customerChartLabels"
+                [options]="customersChartOptions" [colors]="areaChartColors"
+                [legend]="areaChartLegend" [chartType]="areaChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <div class="card-content bg-white">
+        <div class="card-body">
+          <div class="card-block">
+            <div class="height-400">
+              <canvas #generalCanvas height="300" baseChart class="chart"
+                [datasets]="basketChartData" [labels]="basketChartLabels"
+                [options]="basketChartOptions" [colors]="areaChartColors"
+                [legend]="areaChartLegend" [chartType]="areaChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #dateSelector>
+  <img src="assets/images/calendar.svg" alt="">
+  <input #daterange
+          (selected)="selectedDate($event, daterange)"
+          [options]="drpickerOptions"
+          class="form-control"
+          daterangepicker
+          name="daterangeInput"
+          type="text"/>
+</ng-template>

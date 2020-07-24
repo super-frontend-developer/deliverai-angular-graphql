@@ -1,0 +1,33 @@
+:host {
+  td:first-child {
+    width: 100px;
+  }
+
+  .staff-name {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .staff-email {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    color: #808080;
+    font-size: 13px;
+  }
+
+  .search-dropdown {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn-group-toggle {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    label {
+      font-size: 13px;
+    }
+  }
+}

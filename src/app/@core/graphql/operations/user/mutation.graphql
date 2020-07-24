@@ -1,0 +1,108 @@
+mutation CreateUser(
+  $givenName: String!
+  $familyName: String!
+  $email: EmailAddress!
+  $password: String!
+) {
+  createUser(
+    input: {
+      name: {
+        given: $givenName,
+        family: $familyName
+      },
+      email: $email,
+      password: $password
+    }
+  ) {
+    id
+    email
+    name {
+      given
+      family
+    }
+  }
+}
+
+mutation UpdateUser(
+  $id: ID
+  $givenName: String
+  $familyName: String
+  $email: EmailAddress
+  $avatar: Upload
+) {
+  updateUser(
+    input: {
+      id: $id,
+      name: {
+        given: $givenName,
+        family: $familyName
+      },
+      email: $email,
+      avatar: $avatar
+    }
+  ) {
+    id
+    email
+    name {
+      given
+      family
+    }
+    avatar
+  }
+}
+
+mutation RequestResetUserPassword(
+  $email: EmailAddress!
+) {
+  requestResetUserPassword(
+    input: {
+      email: $email
+    }
+  )
+}
+
+mutation TryResetUserPassword(
+  $verificationCode: String!
+  $newPassword: String!
+  $newPasswordConfirmation: String!
+) {
+  tryResetUserPassword(
+    input: {
+      verificationCode: $verificationCode,
+      newPassword: $newPassword,
+      newPasswordConfirmation: $newPasswordConfirmation
+    }
+  )
+}
+
+mutation VerifyUserRegistration(
+  $verificationCode: String!
+) {
+  verifyUserRegistration(
+    input: {
+      verificationCode: $verificationCode
+    }
+  )
+}
+
+mutation UploadUserAvatar(
+  $id: ID
+  $file: Upload!
+) {
+  uploadUserAvatar(
+    input: {
+      id: $id,
+      file: $file
+    }
+  ) {
+    id
+    email
+    name {
+      given
+      family
+    }
+    avatar
+  }
+}
+
+

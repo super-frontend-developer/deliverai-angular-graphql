@@ -1,0 +1,23 @@
+################################################################################
+##                                                                            ##
+##                                   TYPES                                    ##
+##                                                                            ##
+################################################################################
+
+"""Order fulfillment."""
+type OrderFulfillment implements Node {
+    """ID."""
+    id: ID!
+
+    """Store."""
+    store: Store!
+
+    """Queue."""
+    queue: OrderQueue
+
+    """State."""
+    state: OrderFulfillmentState!
+
+    """Readiness ETA."""
+    eta: DateTime
+}

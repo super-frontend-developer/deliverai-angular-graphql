@@ -1,0 +1,18 @@
+:host {
+  .staff-action {
+    margin-bottom: 10px;
+
+    &__name {
+      margin-right: 20px;
+      margin-left: 10px;
+
+      color: #0000ff;
+      font-size: 13px;
+    }
+
+    &__description {
+      color: #808080;
+      font-size: 13px;
+    }
+  }
+}

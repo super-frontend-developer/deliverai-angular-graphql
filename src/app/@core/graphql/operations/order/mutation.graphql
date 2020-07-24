@@ -1,0 +1,198 @@
+mutation MoveOrder(
+    $id: ID!
+    $targetQueue: ID!
+) {
+    moveOrder(
+        input: {
+            id: $id,
+            targetQueue: $targetQueue
+        }
+    ) {
+        id
+        customerName
+        customer {
+            id
+            phoneNumber {
+                countryCode
+                nationalNumber
+            }
+            names
+        }
+        delivery {
+            ... on OrderCourierDelivery {
+                __typename
+                fee
+                address {
+                    addressLine1
+                }
+            }
+            ... on OrderPickupDelivery {
+                __typename
+            }
+        }
+        payment {
+            ... on OrderOnlinePayment {
+                id
+                order {
+                    id
+                    customerName
+                }
+                amount
+                currency {
+                    code
+                }
+            }
+            ...on OrderOfflinePayment {
+                id
+                order {
+                    id
+                    customerName
+                }
+                amount
+                currency {
+                    code
+                }
+                type
+                state
+            }
+        }
+        productConnection {
+            edges {
+                node {
+                    id
+                    name
+                    price
+                    quantity
+                    modifierConnection {
+                        edges {
+                            node {
+                                id
+                                name
+                                optionConnection {
+                                    edges {
+                                        node {
+                                            id
+                                            name
+                                            price
+                                            quantity
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        fulfillment {
+            id
+            queue {
+                id
+                name
+            }
+            state
+            eta
+        }
+        comment
+        createdAt
+    }
+}
+
+mutation CancelOrder(
+    $id: ID!
+    $comment: String!
+) {
+    cancelOrder(
+        input: {
+            id: $id,
+            comment: $comment
+        }
+    ) {
+        id
+        customerName
+        customer {
+            id
+            phoneNumber {
+                countryCode
+                nationalNumber
+            }
+            names
+        }
+        delivery {
+            ... on OrderCourierDelivery {
+                __typename
+                fee
+                address {
+                    addressLine1
+                }
+            }
+            ... on OrderPickupDelivery {
+                __typename
+            }
+        }
+        payment {
+            ... on OrderOnlinePayment {
+                id
+                order {
+                    id
+                    customerName
+                }
+                amount
+                currency {
+                    code
+                }
+            }
+            ...on OrderOfflinePayment {
+                id
+                order {
+                    id
+                    customerName
+                }
+                amount
+                currency {
+                    code
+                }
+                type
+                state
+            }
+        }
+        productConnection {
+            edges {
+                node {
+                    id
+                    name
+                    price
+                    quantity
+                    modifierConnection {
+                        edges {
+                            node {
+                                id
+                                name
+                                optionConnection {
+                                    edges {
+                                        node {
+                                            id
+                                            name
+                                            price
+                                            quantity
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        fulfillment {
+            id
+            queue {
+                id
+                name
+            }
+            state
+            eta
+        }
+        createdAt
+    }
+}

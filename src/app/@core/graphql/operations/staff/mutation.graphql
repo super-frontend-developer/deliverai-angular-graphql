@@ -1,0 +1,100 @@
+mutation BusinessInviteUser(
+    $business: ID!
+    $email: String!
+    $roles: [BusinessRole!]!
+) {
+    businessInviteUser(
+        input: {
+            business: $business,
+            email: $email
+            roles: $roles
+        }
+    )
+}
+
+mutation BusinessAssignUser(
+    $business: ID!
+    $user: ID!
+    $roles: [BusinessRole!]!
+) {
+    businessAssignUser(
+        input: {
+            business: $business,
+            user: $user
+            roles: $roles
+        }
+    ) {
+        id
+        user {
+            id
+            name {
+                given
+                family
+            }
+            email
+        }
+        roles
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+        createdAt
+    }
+}
+
+mutation BusinessRevokeUserAssignment(
+    $id: ID!
+) {
+    businessRevokeUserAssignment(
+        input: {
+            id: $id
+        }
+    )
+}
+
+mutation StoreAssignUser(
+    $store: ID!
+    $user: ID!
+    $roles: [StoreRole!]!
+) {
+    storeAssignUser(
+        input: {
+            store: $store,
+            user: $user
+            roles: $roles
+        }
+    ) {
+        id
+        user {
+            id
+            name {
+                given
+                family
+            }
+            email
+        }
+        roles
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+        createdAt
+    }
+}
+
+mutation StoreRevokeUserAssignment(
+    $id: ID!
+) {
+    storeRevokeUserAssignment(
+        input: {
+            id: $id
+        }
+    )
+}
+

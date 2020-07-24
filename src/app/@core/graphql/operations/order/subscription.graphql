@@ -1,0 +1,179 @@
+subscription LiveOrders(
+    $queue: ID
+    $store: ID
+) {
+    order(
+        queue: $queue
+        store: $store
+    ) {
+        order {
+            id
+            customerName
+            customer {
+                id
+                phoneNumber {
+                    countryCode
+                    nationalNumber
+                }
+                names
+            }
+            delivery {
+                ... on OrderCourierDelivery {
+                    __typename
+                    fee
+                    address {
+                        addressLine1
+                    }
+                }
+                ... on OrderPickupDelivery {
+                    __typename
+                }
+            }
+            payment {
+                ... on OrderOnlinePayment {
+                    id
+                    order {
+                        id
+                        customerName
+                    }
+                    amount
+                    currency {
+                        code
+                    }
+                }
+                ...on OrderOfflinePayment {
+                    id
+                    order {
+                        id
+                        customerName
+                    }
+                    amount
+                    currency {
+                        code
+                    }
+                    type
+                    state
+                }
+            }
+            productConnection {
+                edges {
+                    node {
+                        id
+                        name
+                        price
+                        quantity
+                        modifierConnection {
+                            edges {
+                                node {
+                                    id
+                                    name
+                                    optionConnection {
+                                        edges {
+                                            node {
+                                                id
+                                                name
+                                                price
+                                                quantity
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            fulfillment {
+                id
+                queue {
+                    id
+                    name
+                }
+                state
+                eta
+            }
+            comment
+            createdAt
+        }
+        ... on OrderCreatedEvent {
+            __typename
+            order {
+                id
+                customer {
+                    id
+                    email
+                    names
+                    phoneNumber {
+                        countryCode
+                        nationalNumber
+                    }
+                }
+                customerName
+            }
+        }
+        ... on OrderMovedEvent {
+            __typename
+            order {
+                id
+                customer {
+                    id
+                    email
+                    names
+                    phoneNumber {
+                        countryCode
+                        nationalNumber
+                    }
+                }
+                customerName
+            }
+        }
+        ... on OrderTransferredEvent {
+            __typename
+            order {
+                id
+                customer {
+                    id
+                    email
+                    names
+                    phoneNumber {
+                        countryCode
+                        nationalNumber
+                    }
+                }
+                customerName
+            }
+        }
+        ... on OrderCancelledEvent {
+            __typename
+            order {
+                id
+                customer {
+                    id
+                    email
+                    names
+                    phoneNumber {
+                        countryCode
+                        nationalNumber
+                    }
+                }
+                customerName
+            }
+        }
+        ... on OrderRestoredEvent {
+            __typename
+            order {
+                id
+                customer {
+                    id
+                    email
+                    names
+                    phoneNumber {
+                        countryCode
+                        nationalNumber
+                    }
+                }
+                customerName
+            }
+        }
+    }
+}

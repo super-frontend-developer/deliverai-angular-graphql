@@ -1,0 +1,155 @@
+query BusinessAssignment(
+    $id: ID!
+) {
+    businessAssignment(id: $id) {
+        id
+        user {
+            id
+            name {
+                given
+                family
+            }
+            email
+        }
+        roles
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+        createdAt
+    }
+}
+
+query StoreAssignment(
+    $id: ID!
+) {
+    storeAssignment(id: $id) {
+        id
+        user {
+            id
+            name {
+                given
+                family
+            }
+            email
+        }
+        roles
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+        createdAt
+    }
+}
+
+query BusinessAssignmentConnection(
+    $first: PositiveInt
+    $after: RelayCursor
+
+    $last: PositiveInt
+    $before: RelayCursor
+
+    $offset: NonNegativeInt
+    $limit: PositiveInt
+) {
+    businessAssignmentConnection(
+        first: $first
+        after: $after
+
+        last: $last
+        before: $before
+
+        offset: $offset
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                user {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                    email
+                }
+                roles
+                createdBy {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                }
+                createdAt
+            }
+            cursor
+        }
+        pageInfo {
+            startCursor
+            hasNextPage
+            endCursor
+            hasPreviousPage
+        }
+        totalCount
+    }
+}
+
+query StoreAssignmentConnection(
+    $first: PositiveInt
+    $after: RelayCursor
+
+    $last: PositiveInt
+    $before: RelayCursor
+
+    $offset: NonNegativeInt
+    $limit: PositiveInt
+) {
+    storeAssignmentConnection(
+        first: $first
+        after: $after
+
+        last: $last
+        before: $before
+
+        offset: $offset
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                user {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                    email
+                }
+                roles
+                createdBy {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                }
+                createdAt
+            }
+            cursor
+        }
+        pageInfo {
+            startCursor
+            hasNextPage
+            endCursor
+            hasPreviousPage
+        }
+        totalCount
+    }
+}

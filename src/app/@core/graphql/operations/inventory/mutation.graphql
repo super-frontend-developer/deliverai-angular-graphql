@@ -1,0 +1,129 @@
+mutation CreateInventoryProduct(
+    $business: ID!
+    $category: ID
+    $name: String!
+    $description: String
+    $images: [Upload!]
+) {
+    createInventoryProduct(
+        input: {
+            business: $business,
+            category: $category,
+            name: $name,
+            description: $description,
+            images: $images
+        }
+    ) {
+        id
+        business {
+            id
+            name
+            website
+            image
+        }
+        category {
+            id
+            name
+            description
+            image
+        }
+        name
+        description
+        images
+        createdAt
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+    }
+}
+
+mutation UpdateInventoryProduct(
+    $id: ID!
+    $category: ID
+    $name: String
+    $description: String
+    $images: [Upload!]
+) {
+    updateInventoryProduct(
+        input: {
+            id: $id,
+            category: $category,
+            name: $name,
+            description: $description,
+            images: $images
+        }
+    ) {
+        id
+        business {
+            id
+            name
+            website
+            image
+        }
+        category {
+            id
+            name
+            description
+            image
+        }
+        name
+        description
+        images
+        createdAt
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+    }
+}
+
+mutation DeleteInventoryProduct(
+    $id: ID!
+) {
+    deleteInventoryProduct(
+        input: {
+            id: $id
+        }
+    )
+}
+
+mutation SetManualInventoryProductAvailability(
+    $product: ID!
+    $store: ID!
+    $enabled: Boolean!
+) {
+    setManualInventoryProductAvailability(
+        input: {
+            product: $product
+            store: $store
+            enabled: $enabled
+        }
+    ) {
+        id
+        product {
+            id
+            name
+            description
+            quantities (stores: [$store]) {
+                id
+                amount
+                unit
+                exponent
+            }
+            availabilities (stores: [$store]) {
+                ... on ManualInventoryProductAvailability {
+                    id
+                    enabled
+                }
+            }
+        }
+        enabled
+    }
+}

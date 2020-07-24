@@ -1,0 +1,280 @@
+<div class="sidebar-container" [ngClass]="{'sidebar-container--visible':
+  sidebarVisible}">
+
+  <div class="sidebar-container--backdrop" (click)="sideBarToggle()"></div>
+  <nav class="left-sidebar">
+    <ul>
+      <li (click)="sideBarToggle()">
+        <a routerLink="/account-settings"
+          routerLinkActive="nav-item_active"
+          [routerLinkActiveOptions]="{exact: true}">
+          <div class="text-center pt-2">
+            <img class="avatar-image" *ngIf="avatar" src="{{avatar}}"/>
+            <img class="avatar-image" *ngIf="!avatar" src="{{defaultImage}}"/>
+          </div>
+        </a>
+      </li>
+      <!-- <li class="nav-item">
+          <a href="#">
+            <div class="d-flex align-items-center">
+              <div class="nav-item__icon"><img src="assets/images/loyalty.svg" alt=""></div>
+              <span>Language</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <mat-icon class="arrow-right">arrow_right</mat-icon>
+            </div>
+          </a>
+        </li> -->
+      <li class="nav-item" routerLinkActive="nav-item_active"
+        [routerLinkActiveOptions]="{exact: true}" (click)="sideBarToggle()">
+        <a routerLink="/dashboard">
+          <div class="d-flex align-items-center">
+            <div class="nav-item__icon"><img class="svg-img"
+                src="assets/images/dashboard.svg" alt=""></div>
+            <span>Dashboard</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item nav-item--hasSubmenu" routerLinkActive="nav-item_active" (click)="sideBarToggle()">
+        <a routerLink="/orders">
+          <div class="d-flex align-items-center">
+            <div class="nav-item__icon">
+              <img class="orders-icon orders-icon_inactive"
+                src="assets/images/orders_white.svg" alt="">
+              <img class="orders-icon orders-icon_active"
+                src="assets/images/orders_yellow.svg" alt="">
+            </div>
+            <span>Orders</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <mat-icon class="arrow-right" style="position: relative; right: 4px;">arrow_right</mat-icon>
+          </div>
+        </a>
+        <div class="submenu-content bg-primary">
+          <p>Orders</p>
+          <div class="submenu-title-divider"></div>
+          <ul>
+            <li class="sub-menu">
+              <a routerLink="/orders/live-orders"
+                routerLinkActive="sub-menu_active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <div class="d-flex align-items-center">
+                  <div class="nav-item__icon">
+                    <img class="orders-icon orders-icon_inactive"
+                      src="assets/images/orders_white.svg" alt="">
+                    <img class="orders-icon orders-icon_active"
+                      src="assets/images/orders_yellow.svg" alt="">
+                  </div>
+                  <span>Live Orders</span>
+                </div>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a routerLink="/orders/order-history"
+                routerLinkActive="sub-menu_active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <div class="d-flex align-items-center">
+                  <div class="nav-item__icon">
+                    <img class="svg-img" src="assets/images/order-history.svg"
+                      alt="">
+                  </div>
+                  <span>Order History</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item" routerLinkActive="nav-item_active"
+        [routerLinkActiveOptions]="{exact: true}" (click)="sideBarToggle()">
+        <a routerLink="/catalogs">
+          <div class="d-flex align-items-center">
+            <div class="nav-item__icon"><img class="svg-img"
+                src="assets/images/catalog.svg" alt=""></div>
+            <span>Catalog</span>
+          </div>
+        </a>
+      </li>
+      <!-- <li class="nav-item nav-item--hasSubmenu" routerLinkActive="nav-item_active" (click)="sideBarToggle()">
+        <a routerLink="/catalogs">
+          <div class="d-flex align-items-center">
+            <div class="nav-item__icon"><img class="svg-img"
+                src="assets/images/catalog.svg" alt=""></div>
+            <span>Catalog Builder</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <mat-icon class="arrow-right">arrow_right</mat-icon>
+          </div>
+        </a>
+        <div class="submenu-content bg-primary">
+          <p>Catalog Builder</p>
+          <div class="submenu-title-divider"></div>
+          <ul>
+            <li class="sub-menu">
+              <a routerLink="/catalogs/items-modifiers"
+                routerLinkActive="sub-menu_active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <div class="d-flex align-items-center">
+                  <div class="nav-item__icon"><img class="svg-img"
+                      src="assets/images/items-modifier.svg" alt=""></div>
+                  <span>Items & Modifiers</span>
+                </div>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a routerLink="/catalogs/modifiers-lists"
+                routerLinkActive="sub-menu_active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <div class="d-flex align-items-center">
+                  <div class="nav-item__icon"><img class="svg-img"
+                      src="assets/images/modifierlist.svg" alt=""></div>
+                  <span>Modifiers Lists</span>
+                </div>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a routerLink="/catalogs"
+                routerLinkActive="sub-menu_active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <div class="d-flex align-items-center">
+                  <div class="nav-item__icon"><img class="svg-img"
+                      src="assets/images/catalog.svg" alt=""></div>
+                  <span>Catalog</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li> -->
+      <li class="nav-item" routerLinkActive="nav-item_active"
+        [routerLinkActiveOptions]="{exact: true}" (click)="sideBarToggle()">
+        <a routerLink="/inventory" routerLinkActive="nav-item_active"
+          [routerLinkActiveOptions]="{exact: true}">
+          <div class="d-flex align-items-center">
+            <div class="nav-item__icon"><img class="svg-img"
+                src="assets/images/Inventory.svg" alt=""></div>
+            <span>Inventory</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item nav-item--hasSubmenu" routerLinkActive="nav-item_active" (click)="sideBarToggle()">
+        <a routerLink="/business">
+          <div class="d-flex align-items-center">
+            <div class="nav-item__icon"><img class="svg-img"
+                src="assets/images/venues.svg" alt=""></div>
+            <span>Stores</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <mat-icon class="arrow-right">arrow_right</mat-icon>
+          </div>
+        </a>
+        <div class="submenu-content bg-primary">
+          <p>Setup</p>
+          <div class="submenu-title-divider"></div>
+          <ul>
+            <li class="sub-menu">
+              <a routerLink="/business"
+                routerLinkActive="sub-menu_active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <div class="d-flex align-items-center">
+                  <div class="nav-item__icon"><img class="svg-img"
+                      src="assets/images/businessnew.svg" alt=""></div>
+                  <span>Business</span>
+                </div>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a routerLink="/store"
+                routerLinkActive="sub-menu_active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <div class="d-flex align-items-center">
+                  <div class="nav-item__icon"><img class="svg-img"
+                      src="assets/images/venues.svg" alt=""></div>
+                  <span>Stores</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item" (click)="sideBarToggle()"
+        routerLinkActive="nav-item_active">
+        <a routerLink="/crm">
+          <div class="d-flex align-items-center">
+            <div class="nav-item__icon"><img class="svg-img"
+                src="assets/images/Users.svg" alt=""></div>
+            <span>CRM</span>
+          </div>
+          <!-- <div class="d-flex align-items-center">
+              <mat-icon class="arrow-right">arrow_right</mat-icon>
+            </div> -->
+        </a>
+        <!-- <div class="submenu-content bg-primary">
+            <p>CRM</p>
+            <div class="submenu-title-divider"></div>
+            <ul>
+              <li class="sub-menu">
+                <a routerLink="/home/crm/customers" routerLinkActive="sub-menu_active" [routerLinkActiveOptions]="{exact: true}">
+                  <div class="d-flex align-items-center">
+                    <div class="nav-item__icon"><img class="svg-img" src="assets/images/Users.svg" alt=""></div>
+                    <span>Customers</span>
+                  </div>
+                </a>
+              </li>
+              <li><a routerLink="/home/crm/contacts">Contacts</a></li>
+            </ul>
+          </div> -->
+      </li>
+      <!-- <li class="nav-item">
+          <a href="#">
+            <div class="nav-item__icon"><img class="svg-img" src="assets/images/notifications.svg" alt=""></div>
+            <span>Notifications</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#">
+            <div class="nav-item__icon"><img class="svg-img" src="assets/images/gift.svg" alt=""></div>
+            <span>Gift</span>
+          </a>
+        </li> -->
+      <li class="nav-item" (click)="sideBarToggle()"
+        routerLinkActive="nav-item_active" [routerLinkActiveOptions]="{exact:
+        true}">
+        <a routerLink="/settings">
+          <div class="d-flex align-items-center">
+            <div class="nav-item__icon"><img class="svg-img"
+                src="assets/images/settings.svg" alt=""></div>
+            <span>Settings</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item" (click)="sideBarToggle()"
+        routerLinkActive="nav-item_active" [routerLinkActiveOptions]="{exact:
+        true}">
+        <a routerLink="/staff">
+          <div class="d-flex align-items-center">
+            <div class="nav-item__icon"><img class="svg-img"
+                src="assets/images/staff.svg" alt=""></div>
+            <span>Staff</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item" (click)="logout()"
+        routerLinkActive="nav-item_active" [routerLinkActiveOptions]="{exact:
+        true}">
+        <a>
+          <div class="d-flex align-items-center">
+            <div class="nav-item__icon"><img class="svg-img"
+                src="assets/images/logout.svg" alt=""></div>
+            <span>Logout</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="sidebar-content">
+    <div class="sidebar-content--toggle" (click)="sideBarToggle()"><i
+        class="fas fa-bars"></i></div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

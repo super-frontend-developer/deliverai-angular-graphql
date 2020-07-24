@@ -1,0 +1,66 @@
+<div>
+  <form [formGroup]="staffForm">
+    <input type="hidden" class="form-control" formControlName="id" name="id" id="id">
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" formControlName="first_name" name="first_name" id="first_name">
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" formControlName="last_name" name="last_name" id="last_name">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" formControlName="email" name="email" id="email" placeholder="email@domain.com">
+    </div>
+    <div class="form-group">
+      <label>Role</label>
+      <select class="form-control" formControlName="role" name="role">
+        <option value="">Select</option>
+        <option value="OWNER">Owner</option>
+        <option value="ADMINISTRATOR">Administrator</option>
+        <option value="EMPLOYEE">Employee</option>
+        <option value="WATCHER">Watcher</option>
+      </select>
+    </div>
+
+    <div *ngIf="!isAddMode">
+      <div class="staff-action">
+        <div class="row">
+          <div class="col-md-6 col-7 d-flex align-items-center">
+            <mat-icon class="mat-18" style="color: red;">not_interested</mat-icon>
+            <span class="staff-action__name">Block Account</span>
+          </div>
+          <div class="col-md-6 col-5 d-flex align-items-center">
+            <span class="staff-action__description">If Not blocked</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-7 d-flex align-items-center">
+            <mat-icon class="mat-18" style="color: green;">undo</mat-icon>
+            <span class="staff-action__name">Restore Account</span>
+          </div>
+          <div class="col-md-6 col-5 d-flex align-items-center">
+            <span class="staff-action__description">If blocked</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="d-flex align-items-center col-md-6 col-7">
+            <mat-icon class="mat-18" style="color: red;">delete</mat-icon>
+            <span class="staff-action__name">Delete Account</span>
+          </div>
+          <div class="d-flex align-items-center col-md-6 col-5">
+            <span class="staff-action__description"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+  <div class="divider-el"></div>
+  <div class="button-group">
+    <button class="btn pr-3 pl-3" style="color: #1c2a6b;" (click)="cancel()">Cancel</button>
+    <button *ngIf="!isAddMode" class="btn btn-warning text-white pr-3 pl-3" (click)="update()">SAVE</button>
+    <button *ngIf="isAddMode" class="btn btn-warning text-white pr-3 pl-3" (click)="create()">CREATE</button>
+  </div>
+</div>

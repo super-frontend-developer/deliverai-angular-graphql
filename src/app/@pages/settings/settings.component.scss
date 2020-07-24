@@ -1,0 +1,47 @@
+:host {
+  .main-content {
+    margin-right: 50vh;
+
+    .delivery-order,
+    .pickup-order,
+    .auto-order,
+    .loyalty-status {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .order-enable,
+    .loyalty-off {
+      color: #ff0000;
+    }
+  }
+
+  h6 {
+    color: #1c2a6b;
+  }
+
+  .status-dot {
+    width: 15px;
+    height: 15px;
+
+    background-color: #64bd63;
+    border-radius: 50%;
+
+    &--active {
+      background-color: #ff0000;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .main-content {
+      margin-right: 0;
+
+      .delivery-order,
+      .pickup-order,
+      .auto-order,
+      .loyalty-status {
+        justify-content: flex-start;
+      }
+    }
+  }
+}

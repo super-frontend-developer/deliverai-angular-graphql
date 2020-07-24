@@ -1,0 +1,96 @@
+<header class="header d-block d-sm-block d-md-none">
+  <div class="d-flex align-items-center justify-content-between h-100">
+    <div class="d-flex align-items-center">
+      <h1 class="header-title">Inventory</h1>
+      <div class="search-input-box">
+        <div class="form-control-prepend ml-3 mr-2">
+          <span class="prepend-item"><i class="fas fa-search"></i></span>
+          <input class="form-control search-input" type="text" name="search" id="search" placeholder="Search" (keyup)="search($event)">
+        </div>
+      </div>
+      <a class="search-toggle text-white ml-3 mr-2 mt-2" style="font-size: 20px;">
+        <span class="prepend-item search-icon"><i class="fas fa-search"></i></span>
+        <span class="prepend-item close-icon"><i class="far fa-times-circle"></i></span>
+      </a>
+    </div>
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</header>
+
+<div class="d-md-flex d-sm-none d-none">
+  <div style="width: 90%;">
+    <header class="header">
+      <div class="d-flex align-items-center">
+        <h1 class="header-title">Inventory</h1>
+        <div class="search-input-box">
+          <div class="form-control-prepend ml-4">
+            <span class="prepend-item"><i class="fas fa-search"></i></span>
+            <input class="form-control search-input" type="text" name="search" id="search" placeholder="Search" (keyup)="search($event)">
+          </div>
+        </div>
+        <a class="search-toggle text-white ml-4" style="font-size: 20px;">
+          <span class="prepend-item search-icon"><i class="fas fa-search"></i></span>
+          <span class="prepend-item close-icon"><i class="far fa-times-circle"></i></span>
+        </a>
+      </div>
+    </header>
+  </div>
+
+  <div class="d-flex align-items-center pl-2" style="width: 10%; border-bottom: solid #d8d8d8 1px; border-left: solid #d8d8d8 1px;">
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="mat-elevation-z8 mb-2">
+
+    <table class="table general-box order-list">
+      <thead>
+      <tr>
+        <th class="table-cell">ITEMS</th>
+        <th class="table-cell">AVAILABILITY</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="loadingProducts">
+          <td colspan="2">
+            <mat-progress-spinner class="mt-2" mode="indeterminate" diameter="30" style="position: relative; left: 50%; right: 50%">
+            </mat-progress-spinner>
+          </td>
+        </tr>
+        <tr *ngIf="!loadingProducts && inventoryProductList.length === 0">
+          <td colspan="2" class="text-center">
+            <span>No inventory products data</span>
+          </td>
+        </tr>
+      <tr *ngFor="let item of inventoryProductList">
+        <td class="table-cell d-flex">
+          <div>
+            <img *ngIf="item.node.image" [src]="item.node.image" height="50px" width="75px" class="mr-3" style="border-radius: 3px;">
+            <img *ngIf="!item.node.image" src="assets/images/Item-upload.svg" height="50px" width="75px" class="mr-3" style="border-radius: 3px;">
+          </div>
+
+          <div class="inventory-item">
+            <div>
+              <span class="mb-1 mr-5" style="font-size: 18px; color: #262d40">{{item.node.name}}</span>
+              <span style="font-size: 17px; color: #1c2a6b">AED {{item.node.price}}</span>
+            </div>
+            <span class="mt-1" style="font-size: 17px; color: #808080">{{item.node.description.longContent}}</span>
+          </div>
+        </td>
+        <td class="table-cell">
+          <div class="d-flex justify-content-end">
+            <ui-switch defaultBgColor="red" size="small" checkedLabel="Yes" uncheckedLabel="No" checkedTextColor="#ffffff" uncheckedTextColor="#ffffff" (change)="onChange($event, item.node.id)" [(ngModel)]="!item.node.hidden"></ui-switch>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="inventoryProductList.length" [page]="1" aria-label="Default pagination"></ngb-pagination>
+  </div>
+
+</div>

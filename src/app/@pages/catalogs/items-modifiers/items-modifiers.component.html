@@ -1,0 +1,191 @@
+<header class="header d-block d-sm-block d-md-none">
+  <div class="d-flex align-items-center justify-content-between h-100">
+    <div class="d-flex align-items-center">
+      <h1 class="header-title">Items & Modifiers</h1>
+      <div class="search-input-box">
+        <div class="form-control-prepend ml-3 mr-2">
+          <span class="prepend-item"><i class="fas fa-search"></i></span>
+          <input class="form-control search-input" type="text" name="search" id="search" placeholder="Search" (keyup)="search($event)">
+        </div>
+      </div>
+      <a class="search-toggle text-white ml-3 mr-2 mt-1" style="font-size: 20px;">
+        <span class="prepend-item search-icon"><i class="fas fa-search"></i></span>
+        <span class="prepend-item close-icon"><i class="far fa-times-circle"></i></span>
+      </a>
+    </div>
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</header>
+
+<div class="d-md-flex d-sm-none d-none">
+  <div style="width: 90%;">
+    <header class="header">
+      <div class="d-flex align-items-center">
+        <h1 class="header-title">Items & Modifiers</h1>
+        <div class="search-input-box">
+          <div class="form-control-prepend ml-4">
+            <span class="prepend-item"><i class="fas fa-search"></i></span>
+            <input class="form-control search-input" type="text" name="search" id="search" placeholder="Search" (keyup)="search($event)">
+          </div>
+        </div>
+        <a class="search-toggle text-white ml-4" style="font-size: 20px;">
+          <span class="prepend-item search-icon"><i class="fas fa-search"></i></span>
+          <span class="prepend-item close-icon"><i class="far fa-times-circle"></i></span>
+        </a>
+      </div>
+    </header>
+  </div>
+
+  <div class="d-flex align-items-center pl-2" style="width: 10%; border-bottom: solid #d8d8d8 1px; border-left: solid #d8d8d8 1px;">
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="toggle-menu">
+    <div class="row w-100 mr-0 ml-0">
+      <div class="col-sm-6 col-12 pt-1 pb-1">
+        <div class="row">
+          <div class="col-sm-6 col-12">
+            <div class="btn-group btn-group-toggle w-100" ngbRadioGroup name="type" [(ngModel)]="type">
+              <label class="btn-outline-primary shadow-none" ngbButtonLabel>
+                <input type="radio" ngbButton value="all" (change)="applyFilter()"> All ({{modifiersList.length}})
+              </label>
+              <label class="btn-outline-primary shadow-none" ngbButtonLabel>
+                <input type="radio" ngbButton value="Item" (change)="applyFilter()"> Items
+              </label>
+              <label class="btn-outline-primary shadow-none" ngbButtonLabel>
+                <input type="radio" ngbButton value="Modifier" (change)="applyFilter()"> Modifiers
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-6 col-12">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-12 pt-1 pb-1 d-md-block d-none">
+        <div class="row">
+          <div class="col-lg-6 col-12"></div>
+          <div class="col-lg-6 col-12">
+            <div class="row">
+              <div class="col-6">
+              </div>
+              <div class="col-6 text-right">
+                <a [routerLink]="['..', 'create-item']" class="btn btn-primary pl-4 pr-4 w-100" style="font-size: 14px;">Create</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div cdkDropListGroup class="d-flex">
+    <div class="table-responsive mat-elevation-z8 mb-2 mr-2">
+      <h4 class="p-3">Catalog Products</h4>
+      <table class="table general-box w-100 m-0">
+        <thead>
+          <tr>
+            <th [ngClass]="lg" scope="col">ITEMS</th>
+            <th class="pr-2" [ngClass]="sm" scope="col">ITEMS</th>
+            <th [ngClass]="lg" scope="col" style="width: 10%;">TYPE</th>
+            <th [ngClass]="lg" scope="col" style="width: 10%;">PRICE</th>
+            <th class="pl-2 pr-2" [ngClass]="sm" scope="col">PRICE</th>
+            <th class="text-nowrap" [ngClass]="lg" scope="col" style="width: 10%;">CREATED AT</th>
+            <th [ngClass]="lg" scope="col" style="width: 13%;"></th>
+            <th class="pl-2 pr-2" [ngClass]="sm" class="text-right"><div class="nav-item__icon" [routerLink]="['..', 'create-item']"><i class="fas fa-plus-circle" style="font-size: 16px;"></i></div></th>
+          </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let product of catalogProductList let i=index">
+              <tr>
+                <td [ngClass]="lg">
+                  <div class="d-flex align-items-center">
+                    <!-- <img [src]="modifier.avatar" height="60px" style="border-radius: 4px;"> -->
+                    <img src="assets/images/pasta.jpeg" height="60px" style="border-radius: 4px;">
+                    <span class="ml-4">{{product.node.name}}</span>
+                  </div>
+                </td>
+                <td class="pr-2" [ngClass]="sm">
+                  <div class="d-flex align-items-center">
+                    <!-- <img [src]="modifier.avatar" height="60px" style="border-radius: 4px;"> -->
+                    <img src="assets/images/pasta.jpeg" height="60px" style="border-radius: 4px;">
+                    <div class="ml-3">
+                      <div class="text-nowrap mb-1">{{product.node.name}}</div>
+                      <div>Item</div>
+                    </div>
+                  </div>
+                </td>
+                <td [ngClass]="lg"><ngb-highlight result="Item"></ngb-highlight></td>
+                <td [ngClass]="lg"><ngb-highlight [result]="product.node.price"></ngb-highlight></td>
+                <td class="pl-2 pr-2" [ngClass]="sm">
+                  <div class="mb-1">{{product.node.price}}</div>
+                  <div class="text-nowrap">{{ product.node.createdAt | date }}</div>
+                </td>
+                <td [ngClass]="lg"><ngb-highlight [result]="product.node.createdAt | date"></ngb-highlight></td>
+                <td [ngClass]="lg">
+                  <div class="d-flex align-items-center">
+                    <div>
+                      <a [routerLink]="['..', 'modifiers-detail']" class="border border-primary rounded pt-2 pb-2 pl-4 pr-4 mr-3 align-self-center d-inline-block" >View</a>
+                    </div>
+                    <div>
+                      <button mat-icon-button (click)="delete(product.node.id)">
+                        <mat-icon class="mat-18" color="accent">delete</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </td>
+                <td class="pl-2 pr-2" [ngClass]="sm">
+                  <div class="d-flex align-items-center">
+                    <div>
+                      <div class="ml-3 align-self-center" [routerLink]="['..', 'modifiers-detail']"><i class="fas fa-eye text-primary"></i></div>
+                    </div>
+                    <div>
+                      <button class="mb-1" mat-icon-button (click)="delete(product.node.id)">
+                        <mat-icon class="mat-18" color="accent">delete</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5" style="border: none;">
+                  <mat-chip-list #chipList aria-label="Fruit selection" class="drag-list" [ngClass]="{'empty-box': product.inventoryItems.length == 0}" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="product.inventoryItems">
+                    <mat-chip *ngFor="let item of product.inventoryItems" [selectable]="selectable"
+                             [removable]="removable" (removed)="remove(product, i)">
+                      {{item.node.name}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+      </table>
+    </div>
+    <div class="table-responsive mat-elevation-z8 mb-2 ml-2 d-md-block d-none" style="width: 50%;">
+      <h4 class="p-3">Inventory Products</h4>
+      <table class="table general-box w-100 m-0">
+        <thead>
+        </thead>
+          <tbody class="drag-list" [ngClass]="{'empty-box': inventoryProductList.length == 0}" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="inventoryProductList">
+          <tr class="drag-box" *ngFor="let product of inventoryProductList" cdkDrag>
+            <td [ngClass]="lg">
+              <div class="d-flex align-items-center">
+                <img src="assets/images/pasta.jpeg" height="60px" style="border-radius: 4px;">
+                <span class="ml-4">{{product.node.name}}</span>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+    <!-- <div class="d-flex justify-content-end">
+      <ngb-pagination
+        [collectionSize]="filteredModifiersList.length" [(page)]="page" [pageSize]="pageSize">
+      </ngb-pagination>
+    </div> -->
+  </div>
+</div>
+

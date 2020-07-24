@@ -1,0 +1,95 @@
+<div class="create-store-header">
+  <header class="d-block d-sm-block d-md-none">
+    <nav class="navbar navbar-expand-md navbar-dark h-100 pl-0 pr-0">
+      <div class="d-flex justify-content-between align-items-center w-100 pl-3 pr-3">
+        <div class="align-self-center d-inline-block d-md-none text-white" routerLink="/dashboard"><i class="fas fa-arrow-left"></i></div>
+        <a class="navbar-brand m-0" href="#">Stores / Add Store</a>
+        <div class="navbar-toggler text-white border-0" data-toggle="collapse" data-target="#collapsibleNavbar"><i class="fas fa-ellipsis-v"></i></div>
+      </div>
+
+      <div class="collapse navbar-collapse border-top border-white mt-2" id="collapsibleNavbar">
+        <ul class="navbar-nav pl-3 pr-3">
+          <li class="nav-item active" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <a class="nav-link text-white" routerLink="store-details">Store Details</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <a class="nav-link text-white" routerLink="service-operating-hours">Service & Delivery Hours</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <a class="nav-link text-white" routerLink="delivery-zone">Delivery Zones</a>
+          </li>
+          <!-- <li class="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <a class="nav-link text-white" routerLink="plans-pricing">Plans & Pricing</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <a class="nav-link text-white" routerLink="store-details">Payment details</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <a class="nav-link text-white" routerLink="store-details">Invoices</a>
+          </li> -->
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="d-md-flex d-sm-none d-none">
+    <div style="width: 100%;">
+      <header>
+        <h1>Stores / Add Store</h1>
+      </header>
+    </div>
+  </div>
+</div>
+
+
+<div class="create-store-content">
+  <div class="preferences-content pt-4 pl-4 pb-4 d-md-block d-sm-none d-none">
+    <div>
+      <h6 class="pb-3">Preferences</h6>
+      <div class="divider-el"></div>
+      <ul class="pt-2">
+        <li>
+          <a routerLink="store-details" routerLinkActive="pre-nav-item--active" [routerLinkActiveOptions]="{exact: true}" class="btn text-secondary pt-0 pb-0">
+            <span>Store Details</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="service-operating-hours" routerLinkActive="pre-nav-item--active" [routerLinkActiveOptions]="{exact: true}" class="btn text-secondary pt-0 pb-0">
+            <span>Service & Delivery Hours</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="delivery-zone" routerLinkActive="pre-nav-item--active" [routerLinkActiveOptions]="{exact: true}" class="btn text-secondary pt-0 pb-0">
+            <span>Delivery Zones</span>
+          </a>
+        </li>
+        <!-- <li>
+          <a routerLink="plans-pricing" routerLinkActive="pre-nav-item--active" [routerLinkActiveOptions]="{exact: true}" class="btn text-secondary pt-0 pb-0">
+            <span>Plans & Pricing</span>
+          </a>
+        </li> -->
+      </ul>
+    </div>
+    <!-- <div class="pt-3 pt-2">
+      <h6 class="pb-3">Payments</h6>
+      <div class="divider-el"></div>
+      <ul>
+        <li>
+          <a routerLink="store-details" class="btn text-secondary pt-0 pb-0">
+            <span>Payment details</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="store-details" class="btn text-secondary pt-0 pb-0">
+            <span>Invoices</span>
+          </a>
+        </li>
+      </ul>
+    </div> -->
+  </div>
+
+  <div class="create-store-route w-100">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

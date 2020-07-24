@@ -1,0 +1,61 @@
+:host {
+  agm-map {
+    height: 100%;
+  }
+
+  .form-control {
+    height: 25px;
+  }
+
+  input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  select {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .arrow-icon--change {
+    transform: rotate(90deg);
+  }
+
+  .status-dot {
+    width: 18px;
+    height: 18px;
+
+    background-color: #64bd63;
+    border-radius: 50%;
+  }
+
+  .delivery-zone-content {
+    display: block;
+    height: 100vh;
+  }
+
+  .currency-input {
+    min-width: 0;
+  }
+
+  @media (min-width: 1200px) {
+    .delivery-zone-content {
+      display: flex;
+    }
+
+    .delivery-google-map {
+      width: 73%;
+    }
+
+    .delivery-zone {
+      width: 27%;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1200px) {
+    .delivery-google-map,
+    .delivery-zone {
+      width: 100%;
+    }
+  }
+}

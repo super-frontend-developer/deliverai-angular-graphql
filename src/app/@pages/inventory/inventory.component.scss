@@ -1,0 +1,49 @@
+@mixin mat-checked-slide-toggle-bar {
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: #407404;
+  }
+}
+
+@mixin mat-checked-slide-toggle-thumb {
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #ffffff;
+  }
+}
+
+:host {
+  tr {
+    td:last-child,
+    th:last-child {
+      text-align: right;
+    }
+  }
+
+  .inventory-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  ::ng-deep {
+    @include mat-checked-slide-toggle-bar;
+    @include mat-checked-slide-toggle-thumb;
+
+    .mat-slide-toggle-bar {
+      width: 38px;
+      height: 22px;
+
+      border-radius: 11px;
+    }
+
+    .mat-slide-toggle-bar {
+      background-color: #262d40;
+    }
+
+    .mat-slide-toggle-thumb {
+      position: absolute;
+      top: 4px;
+      left: 1px;
+    }
+  }
+}

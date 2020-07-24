@@ -1,0 +1,130 @@
+mutation CreateBusiness(
+    $name: String!
+    $longContent: String
+    $shortContent: String
+    $website: Url
+    $image: Upload
+) {
+    createBusiness(
+        input: {
+            name: $name,
+            description: {
+                longContent: $longContent,
+                shortContent: $shortContent
+            },
+            website: $website,
+            image: $image
+        }
+    ) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        image
+        storeConnection {
+            edges {
+                node {
+                    id
+                    name
+                    description {
+                        longContent
+                        shortContent
+                    }
+                    address {
+                        city
+                        addressLine1
+                        addressLine2
+                    }
+                    createdAt
+                    createdBy {
+                        id
+                        name {
+                            given
+                            family
+                        }
+                    }
+                    image
+                }
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+    }
+}
+
+mutation UpdateBusiness(
+    $id: ID!
+    $name: String
+    $longContent: String
+    $shortContent: String
+    $website: Url
+    $image: Upload
+) {
+    updateBusiness(
+        input: {
+            id: $id,
+            name: $name,
+            description: {
+                longContent: $longContent,
+                shortContent: $shortContent
+            },
+            website: $website,
+            image: $image
+        }
+    ) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        image
+        storeConnection {
+            edges {
+                node {
+                    id
+                    name
+                    description {
+                        longContent
+                        shortContent
+                    }
+                    address {
+                        city
+                        addressLine1
+                        addressLine2
+                    }
+                    createdAt
+                    createdBy {
+                        id
+                        name {
+                            given
+                            family
+                        }
+                    }
+                    image
+                }
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+    }
+}
+
+mutation DeleteBusiness(
+    $id: ID!
+) {
+    deleteBusiness(
+        input: {
+            id: $id
+        }
+    )
+}
+

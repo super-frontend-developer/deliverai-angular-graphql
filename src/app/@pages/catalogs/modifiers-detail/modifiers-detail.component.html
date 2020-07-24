@@ -1,0 +1,113 @@
+<header class=" flex-wrap">
+  <h1 class="mr-4 mb-1">Edit Modifiers List</h1>
+
+</header>
+
+<div class="main-content">
+
+  <div class="box-box">
+
+    <div class="d-flex p-4 border-bottom align-items-start justify-content-between">
+
+      <div class="row">
+        <div class="col-12 mb-4">Name<div class="mt-1 bigger-label text-secondary">New Modifier List</div></div>
+        <div class="col-sm-6 col-12 mb-4">Display Name<div class="mt-1 bigger-label text-secondary">New Modifier List</div></div>
+        <div class="col-sm-6 col-12 mb-4">Type<div class="mt-1 bigger-label text-secondary">Single</div></div>
+        <div class="col-sm-6 col-12 mb-4">Min Modifier<div class="mt-1 bigger-label text-secondary">2</div></div>
+        <div class="col-sm-6 col-12 mb-4">Max Modifier<div class="mt-1 bigger-label text-secondary">5</div></div>
+      </div>
+
+      <button class="btn btn-primary px-4">Edit</button>
+
+    </div>
+
+    <div class="d-flex p-4 align-items-start justify-content-between">
+      <h1 class="text-primary">Modifiers</h1>
+      <button class="btn btn-primary px-4" (click)="addModifierModal(addModifier)">Add</button>
+    </div>
+
+    <table class="table border-bottom mb-5">
+      <colgroup>
+        <col class="w-100"/>
+        <col/>
+        <col/>
+      </colgroup>
+      <tbody>
+      <tr *ngFor="let x of [0,1,2]">
+        <td class="pl-4">Salads</td>
+        <td class="text-right text-nowrap">AED 200</td>
+        <td class="text-right text-nowrap">
+          <div class="ml-3 align-self-center d-inline-block"><i class="fas fa-eye text-primary"></i></div>
+          <div class="ml-3 align-self-center d-inline-block cursor-pointer" ><i class="fas fa-pen text-primary"></i></div>
+          <div class="mx-3 align-self-center d-inline-block"><i class="fas fa-trash-alt text-danger"></i></div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex p-4 align-items-start justify-content-between border-top">
+      <h1 class="text-primary">Items attached (2)</h1>
+      <button class="btn btn-primary px-4" (click)="addItemModal(addItem)">Add</button>
+    </div>
+
+    <table class="table border-bottom">
+      <colgroup>
+        <col class="w-100"/>
+        <col/>
+      </colgroup>
+      <tbody>
+      <tr *ngFor="let x of [0,1]">
+        <td class="pl-4">Italian Pasta</td>
+        <td class="text-right text-nowrap">
+          <div class="ml-3 align-self-center d-inline-block"><i class="fas fa-eye text-primary"></i></div>
+          <div class="mx-3 align-self-center d-inline-block"><i class="fas fa-trash-alt text-danger"></i></div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #addModifier let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Add Modifier</h4>
+    </div>
+    <div class="modal-body">
+      <input type="text" class="form-control" placeholder="Search for modifier">
+
+      <div class="items-list">
+        <label class="custom-control custom-checkbox d-flex py-3 border-bottom" *ngFor="let x of [0,1,2,3,4,5,6,7,8,9,10,11]">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label flex-grow-1">Modifier {{x}}</span>
+          <span class="pr-1">AED 200</span>
+        </label>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary px-4" (click)="modal.close('cancel')">Cancel</button>
+      <button type="submit" class="btn btn-warning px-4 text-white" (click)="modal.close('add')">Add 0 Modifier</button>
+    </div>
+</ng-template>
+
+<ng-template #addItem let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Add Modifier</h4>
+    </div>
+    <div class="modal-body">
+      <input type="text" class="form-control" placeholder="Search for an item">
+
+      <div class="items-list">
+        <label class="custom-control custom-checkbox d-flex py-3 border-bottom" *ngFor="let x of [0,1,2,3,4,5,6,7,8,9,10,11]">
+          <input type="checkbox" class="custom-control-input">
+          <span class="custom-control-label flex-grow-1">Item {{x}}</span>
+          <span class="pr-1">AED 200</span>
+        </label>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary px-4" (click)="modal.close('cancel')">Cancel</button>
+      <button type="submit" class="btn btn-warning px-4 text-white" (click)="modal.close('add')">Add 0 Modifier</button>
+    </div>
+</ng-template>

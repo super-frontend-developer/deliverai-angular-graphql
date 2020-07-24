@@ -1,0 +1,40 @@
+.dropdown-arrow {
+  border-left-color: rgba(255, 255, 255, 0.5);
+}
+
+.dropdown-menu {
+  transform: translate(0, 37px) !important;
+
+  .dropdown-item {
+    color: #1c2a6b;
+
+    &:active,
+    &:hover {
+      background-color: #b0b4d0;
+    }
+  }
+}
+
+.data-table {
+  margin-right: 18vh;
+
+  table {
+    width: 100%;
+
+    th {
+      color: #1c2a6b !important;
+      font-weight: 600 !important;
+      vertical-align: middle;
+    }
+
+    td {
+      vertical-align: middle;
+    }
+  }
+}
+
+.mat-paginator {
+  margin-right: 18vh;
+
+  background: transparent;
+}

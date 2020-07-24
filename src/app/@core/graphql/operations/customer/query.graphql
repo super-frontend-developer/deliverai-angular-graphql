@@ -1,0 +1,80 @@
+query CustomerConnection (
+    $business: ID
+    $first: PositiveInt
+    $after: RelayCursor
+
+    $last: PositiveInt
+    $before: RelayCursor
+
+    $offset: NonNegativeInt
+    $limit: PositiveInt
+) {
+    customerConnection(
+        business: $business
+        first: $first
+        after: $after
+
+        last: $last
+        before: $before
+
+        offset: $offset
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                phoneNumber {
+                    countryCode
+                    nationalNumber
+                }
+                names
+                firstOrder {
+                    id
+                    createdAt
+                }
+                lastOrder {
+                    id
+                    createdAt
+                }
+                totalSpent
+            }
+            cursor
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+        }
+        totalCount
+    }
+}
+
+query BusinessCustomerConnection(
+    $id: ID!
+) {
+    business(id: $id) {
+        customerConnection {
+            edges {
+                node {
+                    id
+                    names
+                    phoneNumber {
+                        countryCode
+                        nationalNumber
+                    }
+                    numberOfOrders
+                    firstOrder {
+                        id
+                        createdAt
+                    }
+                    lastOrder {
+                        id
+                        createdAt
+                    }
+                    totalSpent
+                }
+            }
+        }
+    }
+}
+
+

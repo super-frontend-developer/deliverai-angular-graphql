@@ -1,0 +1,165 @@
+@charset "utf-8";
+
+.order-statuses {
+  @extend %general-box;
+
+  display: flex;
+
+  width: 100%;
+  margin-bottom: 1.5rem !important;
+
+  background-color: #ffffff;
+  border-width: 0;
+  border-radius: 4px;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.5);
+
+  a {
+    flex: auto;
+
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    //font-size: 1.2rem;
+  }
+
+  a:not(:first-child) {
+    border-left: solid $secondary 1px;
+  }
+
+  a:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  a:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  .mark-order {
+    display: inline-block;
+    margin-right: 6px;
+    padding: 4px;
+
+    vertical-align: baseline;
+
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+
+    &__new {
+      color: #59a600;
+
+      background-color: #b8e986;
+      border-color: #59a600;
+    }
+
+    &__progress {
+      color: #f5a623;
+
+      background-color: #fff7d3;
+      border-color: #f5a623;
+    }
+
+    &__ready {
+      color: #ff0000;
+
+      background-color: #ffdada;
+      border-color: #ff0000;
+    }
+
+    &__delivered {
+      color: #1b2a6a;
+
+      background-color: #a6b0c7;
+      border-color: #1b2a6a;
+    }
+
+    &__rejected {
+      color: #fe5e7d;
+
+      background-color: rgba(254, 94, 125, 0.41);
+      border-color: #fe5e7d;
+    }
+  }
+}
+
+.active-order {
+  @extend %right-panel;
+
+  width: 311px;
+  padding: $padding;
+
+  &__time {
+    padding: 8px;
+
+    color: #fff !important;
+    font-size: 14px;
+    text-align: center;
+
+    background-color: $danger;
+  }
+
+  &__table {
+    font-size: 13px;
+
+    background-color: #fff;
+    border-right: solid #b8e986 1px;
+    border-left: solid #59a600 5px;
+
+    &--underlined {
+      border-bottom: solid #b8e986 2px;
+    }
+
+    td {
+      padding: 8px !important;
+
+      color: #9b9b9b !important;
+      vertical-align: top;
+    }
+  }
+
+  &__property {
+    color: #4a4a4a !important;
+    font-weight: bold;
+    font-size: 13px;
+  }
+
+  &__item {
+    display: flex;
+    margin-bottom: 6px;
+
+    &_name {
+      flex: 1;
+
+      color: #9b9b9b !important;
+    }
+
+    &_price {
+      color: #9b9b9b !important;
+      text-align: right;
+    }
+  }
+
+}
+
+.order-list {
+  @include media-breakpoint-between(xs, sm) {
+    font-size: 13px;
+
+    td,
+    th {
+      padding: 8px 4px;
+    }
+  }
+  @include media-breakpoint-only(md) {
+    font-size: 1.6vw;
+  }
+  @include media-breakpoint-up(lg) {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+
+}

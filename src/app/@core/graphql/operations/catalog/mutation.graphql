@@ -1,0 +1,266 @@
+mutation CreateCatalog(
+    $business: ID!
+    $stores: [ID!]
+    $name: String!
+    $slug: String
+    $currency: CurrencyCode!
+) {
+    createCatalog(
+        input: {
+            business: $business,
+            stores: $stores,
+            name: $name,
+            slug: $slug,
+            currency: $currency
+        }
+    ) {
+        id
+        name
+        currency {
+            code
+        }
+        createdAt
+    }
+}
+
+mutation UpdateCatalog(
+    $catalog: ID!
+    $stores: [ID!]
+    $name: String
+    $slug: String
+) {
+    updateCatalog(
+        input: {
+            catalog: $catalog,
+            stores: $stores,
+            name: $name,
+            slug: $slug
+        }
+    ) {
+        id
+        name
+        currency {
+            code
+        }
+        createdAt
+    }
+}
+
+mutation DeleteCatalog(
+    $catalog: ID!
+) {
+    deleteCatalog(
+        input: {
+            catalog: $catalog
+        }
+    )
+}
+
+mutation CreateCatalogProduct(
+    $catalog: ID!
+    $category: ID
+    $name: String!
+    $longContent: String
+    $shortContent: String
+    $price: BigFloat!
+    $image: Upload
+) {
+    createCatalogProduct(
+        input: {
+            catalog: $catalog,
+            category: $category,
+            name: $name,
+            description: {
+                longContent: $longContent,
+                shortContent: $shortContent
+            },
+            price: $price,
+            image: $image
+        }
+    ) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        modifierConnection {
+            edges {
+                node {
+                    id
+                    name
+                    minQuantity
+                    maxQuantity
+                    optionConnection {
+                        edges {
+                            node {
+                                id
+                                name
+                                price
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        image
+        price
+        hidden
+        createdAt
+    }
+}
+
+mutation UpdateCatalogProduct(
+    $product: ID!
+    $hidden: Boolean
+) {
+    updateCatalogProduct(
+        input: {
+            product: $product,
+            hidden: $hidden
+        }
+    ) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        catalog {
+            id
+            name
+        }
+        modifierConnection {
+            edges {
+                node {
+                    id
+                    name
+                    minQuantity
+                    maxQuantity
+                    optionConnection {
+                        edges {
+                            node {
+                                id
+                                name
+                                price
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        image
+        price
+        hidden
+        createdAt
+    }
+}
+
+mutation DeleteCatalogProduct(
+    $product: ID!
+) {
+    deleteCatalogProduct(
+        input: {
+            product: $product
+        }
+    )
+}
+
+mutation CreateCatalogCategory(
+    $catalog: ID!
+    $name: String!
+    $beforeCategory: ID
+    $afterCategory: ID
+) {
+    createCatalogCategory(
+        input: {
+            catalog: $catalog,
+            name: $name,
+            beforeCategory: $beforeCategory,
+            afterCategory: $afterCategory
+        }
+    ) {
+        id
+        name
+        position
+        productConnection {
+            edges {
+                node {
+                    id
+                    name
+                    description {
+                        longContent
+                        shortContent
+                    }
+                    modifierConnection {
+                        edges {
+                            node {
+                                id
+                                name
+                                minQuantity
+                                maxQuantity
+                                optionConnection {
+                                    edges {
+                                        node {
+                                            id
+                                            name
+                                            price
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    image
+                    price
+                    hidden
+                    createdAt
+                }
+                cursor
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+    }
+}
+
+mutation UpdateCatalogCategory(
+    $category: ID!
+    $name: String
+    $beforeCategory: ID
+    $afterCategory: ID
+) {
+    updateCatalogCategory(
+        input: {
+            category: $category,
+            name: $name,
+            beforeCategory: $beforeCategory,
+            afterCategory: $afterCategory
+        }
+    ) {
+        id
+        name
+        catalog {
+            id
+            name
+            slug
+            currency {
+                code
+                displayName
+                symbol
+            }
+        }
+        createdAt
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+    }
+}
+

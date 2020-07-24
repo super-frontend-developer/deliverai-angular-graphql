@@ -1,0 +1,22 @@
+<div class="login-container">
+  <img alt="" src="assets/images/DeliverAiwhite.svg">
+
+  <div class="login-box general-box my-4" style="max-width: 450px;">
+    <div class="modal-header justify-content-center d-md-block d-none">
+      <h3 class="text-dark font-weight-normal text-center p-2">Check Your Email</h3>
+    </div>
+
+    <div class="modal-body text-center p-md-5">
+      <div class="mb-5">
+        <p *ngIf="path == 'reset'" class="text-secondary mt-2 mb-2 text-center" style="font-size: 15px;">We've sent you instructions for reset password.</p>
+        <p *ngIf="path == 'verify'" class="text-secondary mt-2 mb-2 text-center" style="font-size: 15px;">We've sent you instructions for email verification.</p>
+        <p *ngIf="path == 'reset'" class="text-secondary mt-2 mb-2 text-center" style="font-size: 15px;">Please check your email</p>
+        <p *ngIf="path == 'verify'" class="text-secondary mt-2 mb-2 text-center" style="font-size: 15px;">Please verify your email</p>
+      </div>
+
+      <div>
+        <button class="btn btn-warning w-100 text-white" (click)="redirect()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>

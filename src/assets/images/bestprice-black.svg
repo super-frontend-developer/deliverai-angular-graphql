@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-bestprice-black</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon-bestprice-black" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M22.7991188,33.7147852 L22.7991188,21.7991188 L34.7147852,21.7991188 L40.6726185,11.479849 L50.9918883,17.4376822 L61.3111581,11.479849 L67.2689914,21.7991188 L79.1846578,21.7991188 L79.1846578,33.7147852 L89.5039276,39.6726185 L83.5460944,49.9918883 L89.5039276,60.3111581 L79.1846578,66.2689914 L79.1846578,78.1846578 L67.2689914,78.1846578 L61.3111581,88.5039276 L50.9918883,82.5460944 L40.6726185,88.5039276 L34.7147852,78.1846578 L22.7991188,78.1846578 L22.7991188,66.2689914 L12.479849,60.3111581 L18.4376822,49.9918883 L12.479849,39.6726185 L22.7991188,33.7147852 Z" id="Combined-Shape" stroke="#1B2A6A" stroke-width="2" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" transform="translate(50.991888, 49.991888) rotate(18.000000) translate(-50.991888, -49.991888) "></path>
+        <text id="AED" font-family="Helvetica" font-size="8" font-weight="normal" fill="#1B2A6A">
+            <tspan x="42" y="52">AED</tspan>
+        </text>
+    </g>
+</svg>

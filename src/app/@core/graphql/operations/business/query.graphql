@@ -1,0 +1,176 @@
+query BusinessLookupById(
+    $id: ID!
+) {
+    business(id: $id) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        createdAt
+        website
+        image
+    }
+}
+
+query CurrentUserBusinessStoreConnection {
+    me {
+        businessAssignmentConnection {
+            edges {
+                node {
+                    id
+                    user {
+                        id
+                        name {
+                            given
+                            family
+                        }
+                        email
+                    }
+                    business {
+                        id
+                        name
+                        description {
+                            longContent
+                            shortContent
+                        }
+                        image
+                        storeConnection {
+                            edges {
+                                node {
+                                    id
+                                    name
+                                    description {
+                                        longContent
+                                        shortContent
+                                    }
+                                    address {
+                                        id
+                                        country
+                                        city
+                                        addressLine1
+                                        addressLine2
+                                    }
+                                    createdAt
+                                    createdBy {
+                                        id
+                                        name {
+                                            given
+                                            family
+                                        }
+                                    }
+                                    image
+                                }
+                            }
+                            pageInfo {
+                                hasNextPage
+                                hasPreviousPage
+                            }
+                            totalCount
+                        }
+                    }
+                    roles
+                    createdBy {
+                        id
+                        name {
+                            given
+                            family
+                        }
+                    }
+                    createdAt
+                }
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+    }
+}
+
+query BusinessConnection(
+    $first: PositiveInt
+    $after: RelayCursor
+
+    $last: PositiveInt
+    $before: RelayCursor
+
+    $offset: NonNegativeInt
+    $limit: PositiveInt
+) {
+    businessConnection(
+        first: $first
+        after: $after
+
+        last: $last
+        before: $before
+
+        offset: $offset
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                name
+                description {
+                    longContent
+                    shortContent
+                }
+                createdAt
+                createdBy {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                }
+                website
+                storeConnection {
+                    edges {
+                        node {
+                            id
+                            name
+                            description {
+                                longContent
+                                shortContent
+                            }
+                            address {
+                                city
+                                addressLine1
+                                addressLine2
+                            }
+                            timeZone {
+                                id
+                                displayName
+                                observesDaylightTime
+                                offset
+                            }
+                            createdAt
+                            createdBy {
+                                id
+                                name {
+                                    given
+                                    family
+                                }
+                            }
+                        }
+                        cursor
+                    }
+                    pageInfo {
+                        hasNextPage
+                        hasPreviousPage
+                    }
+                    totalCount
+                }
+            }
+            cursor
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+        }
+        totalCount
+    }
+}

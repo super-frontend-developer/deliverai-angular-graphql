@@ -1,0 +1,328 @@
+query InventoryCategory(
+    $id: ID!
+) {
+    inventoryCategory(id: $id) {
+        id
+        business {
+            id
+            name
+            website
+            image
+        }
+        name
+        description
+        image
+        availabilities {
+            id
+            category {
+                id
+                name
+                description
+                image
+                createdAt
+            }
+            store {
+                id
+                name
+                timeZone {
+                    id
+                    displayName
+                    observesDaylightTime
+                    offset
+                }
+            }
+            enabled
+        }
+        createdAt
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+    }
+}
+
+query InventoryCategoryConnection(
+    $first: PositiveInt,
+    $after: RelayCursor,
+
+    $last: PositiveInt,
+    $before: RelayCursor,
+
+    $offset: NonNegativeInt,
+    $limit: PositiveInt
+) {
+    inventoryCategoryConnection(
+        first: $first,
+        after: $after,
+
+        last: $last,
+        before: $before,
+
+        offset: $offset,
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                business {
+                    id
+                    name
+                    website
+                    image
+                }
+                name
+                description
+                image
+                availabilities {
+                    id
+                    category {
+                        id
+                        name
+                        description
+                        image
+                        createdAt
+                    }
+                    store {
+                        id
+                        name
+                        timeZone {
+                            id
+                            displayName
+                            observesDaylightTime
+                            offset
+                        }
+                    }
+                    enabled
+                }
+                productConnection {
+                    edges {
+                        node {
+                            id
+                            business {
+                                id
+                                name
+                                website
+                                image
+                            }
+                            category {
+                                id
+                                name
+                                description
+                                image
+                            }
+                            name
+                            description
+                            images
+                            quantities {
+                                id
+                                product {
+                                    id
+                                    name
+                                    description
+                                }
+                                store {
+                                    id
+                                    name
+                                    timeZone {
+                                        id
+                                        displayName
+                                        observesDaylightTime
+                                        offset
+                                    }
+                                }
+                                amount
+                                unit
+                                exponent
+                            }
+                            availabilities {
+                                id
+                                product {
+                                    id
+                                    name
+                                    description
+                                }
+                                store {
+                                    id
+                                    name
+                                    timeZone {
+                                        id
+                                        displayName
+                                        observesDaylightTime
+                                        offset
+                                    }
+                                }
+                            }
+                            createdAt
+                            createdBy {
+                                id
+                                name {
+                                    given
+                                    family
+                                }
+                            }
+                        }
+                        cursor
+                    }
+                    pageInfo {
+                        hasNextPage
+                        hasPreviousPage
+                    }
+                    totalCount
+                }
+                createdAt
+                createdBy {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                }
+            }
+            cursor
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+        }
+        totalCount
+    }
+}
+
+query InventoryProduct(
+    $id: ID!
+) {
+    inventoryProduct(id: $id) {
+        id
+        business {
+            id
+            name
+            website
+            image
+        }
+        category {
+            id
+            name
+            description
+            image
+        }
+        name
+        description
+        images
+        quantities {
+            id
+            product {
+                id
+                name
+                description
+            }
+            store {
+                id
+                name
+                timeZone {
+                    id
+                    displayName
+                    observesDaylightTime
+                    offset
+                }
+            }
+            amount
+            unit
+            exponent
+        }
+        availabilities {
+            id
+            product {
+                id
+                name
+                description
+            }
+            store {
+                id
+                name
+                timeZone {
+                    id
+                    displayName
+                    observesDaylightTime
+                    offset
+                }
+            }
+        }
+        createdAt
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+    }
+}
+
+query InventoryProductConnection(
+    $business: ID,
+    $store: ID!,
+    $first: PositiveInt,
+    $after: RelayCursor,
+
+    $last: PositiveInt,
+    $before: RelayCursor,
+
+    $offset: NonNegativeInt,
+    $limit: PositiveInt
+) {
+    inventoryProductConnection(
+        business: $business,
+        store: $store,
+        first: $first,
+        after: $after,
+
+        last: $last,
+        before: $before,
+
+        offset: $offset,
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                business {
+                    id
+                    name
+                    website
+                }
+                name
+                description
+                images
+                quantities (stores: [$store]) {
+                    id
+                    amount
+                    unit
+                    exponent
+                }
+                availabilities (stores: [$store]) {
+                    ... on ManualInventoryProductAvailability {
+                        id
+                        enabled
+                    }
+                }
+                createdAt
+                createdBy {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                }
+            }
+            cursor
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+        }
+        totalCount
+    }
+}

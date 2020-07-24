@@ -1,0 +1,465 @@
+query Catalog(
+    $id: ID!
+) {
+    catalog(id: $id) {
+        id
+        name
+        currency {
+            code
+            displayName
+            symbol
+        }
+        categoryConnection {
+            edges {
+                node {
+                    id
+                    name
+                    position
+                    productConnection {
+                        edges {
+                            node {
+                                id
+                                name
+                                description {
+                                    longContent
+                                    shortContent
+                                }
+                                modifierConnection {
+                                    edges {
+                                        node {
+                                            id
+                                            name
+                                            minQuantity
+                                            maxQuantity
+                                            optionConnection {
+                                                edges {
+                                                    node {
+                                                        id
+                                                        name
+                                                        price
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                image
+                                price
+                                hidden
+                                createdAt
+                            }
+                        }
+                    }
+                }
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+        createdAt
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+    }
+}
+
+query BusinessCatalogConnection(
+    $id: ID!
+) {
+    business(id: $id) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        catalogConnection {
+            edges {
+                node {
+                    id
+                    name
+                    currency {
+                        code
+                    }
+                    createdAt
+                }
+            }
+        }
+        website
+    }
+}
+
+query BusinessCatalogProductConnection(
+    $id: ID!
+) {
+    business(id: $id) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        catalogConnection {
+            edges {
+                node {
+                    id
+                    name
+                    currency {
+                        code
+                    }
+                    productConnection {
+                        edges {
+                            node {
+                                id
+                                name
+                                description {
+                                    longContent
+                                    shortContent
+                                }
+                                price
+                                hidden
+                                image
+                                modifierConnection {
+                                    edges {
+                                        node {
+                                            id
+                                            name
+                                            hidden
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    createdAt
+                }
+            }
+        }
+        website
+    }
+}
+
+query CatalogConnection(
+    $first: PositiveInt
+    $after: RelayCursor
+
+    $last: PositiveInt
+    $before: RelayCursor
+
+    $offset: NonNegativeInt
+    $limit: PositiveInt
+) {
+    catalogConnection(
+        first: $first
+        after: $after
+
+        last: $last
+        before: $before
+
+        offset: $offset
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                name
+                slug
+                createdAt
+                createdBy {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                }
+            }
+            cursor
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+        }
+        totalCount
+    }
+}
+
+query CatalogProduct($id: ID!) {
+  catalogProduct(id: $id) {
+    id
+    name
+    description {
+      longContent
+      shortContent
+    }
+    catalog {
+      id
+      name
+      slug
+      currency {
+        code
+        displayName
+        symbol
+      }
+    }
+    modifierConnection {
+      edges {
+        node {
+          id
+          name
+          minQuantity
+          maxQuantity
+          multiple
+          optionConnection {
+            edges {
+              node {
+                id
+                name
+                price
+                quantity
+              }
+            }
+          }
+        }
+      }
+    }
+    price
+    hidden
+    image
+    createdAt
+    createdBy {
+      id
+      name {
+        given
+        family
+      }
+    }
+  }
+}
+
+query CatalogProductConnection(
+    $first: PositiveInt
+    $after: RelayCursor
+
+    $last: PositiveInt
+    $before: RelayCursor
+
+    $offset: NonNegativeInt
+    $limit: PositiveInt
+) {
+    catalogProductConnection(
+        first: $first
+        after: $after
+
+        last: $last
+        before: $before
+
+        offset: $offset
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                name
+                description {
+                    longContent
+                    shortContent
+                }
+                price
+                image
+                createdAt
+                createdBy {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                }
+            }
+            cursor
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+        }
+        totalCount
+    }
+}
+
+
+query CatalogCategory(
+    $id: ID!
+) {
+    catalogCategory(id: $id) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        catalog {
+            id
+            name
+            slug
+            currency {
+                code
+                displayName
+                symbol
+            }
+        }
+        parentCategory {
+            id
+            name
+        }
+        productConnection {
+            edges {
+                node {
+                    id
+                    name
+                    description {
+                        longContent
+                        shortContent
+                    }
+                    catalog {
+                        id
+                        name
+                        slug
+                        currency {
+                            code
+                            displayName
+                            symbol
+                        }
+                    }
+                    price
+                    createdAt
+                    createdBy {
+                        id
+                        name {
+                            given
+                            family
+                        }
+                    }
+                }
+                cursor
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+        createdAt
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+    }
+}
+
+
+query CatalogCategoryConnection(
+    $first: PositiveInt
+    $after: RelayCursor
+
+    $last: PositiveInt
+    $before: RelayCursor
+
+    $offset: NonNegativeInt
+    $limit: PositiveInt
+) {
+    catalogCategoryConnection(
+        first: $first
+        after: $after
+
+        last: $last
+        before: $before
+
+        offset: $offset
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                name
+                description {
+                    longContent
+                    shortContent
+                }
+                catalog {
+                    id
+                    name
+                    slug
+                    currency {
+                        code
+                        displayName
+                        symbol
+                    }
+                }
+                parentCategory {
+                    id
+                    name
+                }
+                productConnection {
+                    edges {
+                        node {
+                            id
+                            name
+                            description {
+                                longContent
+                                shortContent
+                            }
+                            catalog {
+                                id
+                                name
+                                slug
+                                currency {
+                                    code
+                                    displayName
+                                    symbol
+                                }
+                            }
+                            price
+                            createdAt
+                            createdBy {
+                                id
+                                name {
+                                    given
+                                    family
+                                }
+                            }
+                        }
+                        cursor
+                    }
+                    pageInfo {
+                        hasNextPage
+                        hasPreviousPage
+                    }
+                    totalCount
+                }
+                createdAt
+                createdBy {
+                    id
+                    name {
+                        given
+                        family
+                    }
+                }
+            }
+            cursor
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+        }
+        totalCount
+    }
+}
+

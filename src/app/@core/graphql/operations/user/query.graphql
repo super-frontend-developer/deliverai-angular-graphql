@@ -1,0 +1,67 @@
+query CurrentUser {
+    me {
+        id
+        name {
+            given
+            family
+        }
+        email
+        avatar
+    }
+}
+
+query UserLookupById(
+    $id: ID!
+) {
+    user(id: $id) {
+        id
+        name {
+            given
+            family
+        }
+        email
+        createdAt
+    }
+}
+
+query UserConnection(
+    $first: PositiveInt,
+    $after: RelayCursor,
+
+    $last: PositiveInt,
+    $before: RelayCursor,
+
+    $offset: NonNegativeInt,
+    $limit: PositiveInt
+) {
+    userConnection(
+        first: $first,
+        after: $after,
+
+        last: $last,
+        before: $before,
+
+        offset: $offset,
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                name {
+                    given
+                    family
+                }
+                email
+                createdAt
+            }
+            cursor
+        }
+        pageInfo {
+            startCursor
+            hasNextPage
+            endCursor
+            hasPreviousPage
+        }
+        totalCount
+    }
+}

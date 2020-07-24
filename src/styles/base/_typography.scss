@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+//
+// Description:
+//
+//    This file contains all the typography declarations.
+//
+
+@import '../abstracts/variables';
+
+*,
+html,
+body {
+  font-size: $base-font-size;
+  font-family: $font-family-stack;
+  //color: #303030;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; /* stylelint-disable-line property-no-vendor-prefix */
+  -ms-text-size-adjust: 100%; /* stylelint-disable-line property-no-vendor-prefix */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  font-family: $font-family-stack;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.bigger-label {
+  font-size: 1.2rem;
+}

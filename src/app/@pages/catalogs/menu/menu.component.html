@@ -1,0 +1,352 @@
+
+<header *ngIf="catalog" class="d-flex justify-content-between">
+  <h1>{{catalog.name}}</h1>
+  <div class="d-flex align-items-center">
+    <button class="btn btn-primary btn-sm" (click)="previewStore()"><i class="fa fa-external-link"></i> Preview Your Store</button>
+    <div *ngIf="!isModifierView" class="pl-3 pr-3 cursor-pointer" (click)="mobilePreviewToggle()"><img class="svg-img" src="assets/images/add-items.svg" alt=""></div>
+    <div *ngIf="isModifierView" class="pl-3 pr-3 cursor-pointer" (click)="mobilePreviewToggle()"><i class="fa fa-mobile" aria-hidden="true" style="color: #1c2a6b; font-size: 25px"></i></div>
+  </div>
+</header>
+<div *ngIf="catalog" cdkDropListGroup class="flex-grow-1 d-flex align-items-stretch">
+
+  <div class="main-content flex-grow-1">
+    <h4 class="mb-3 text-primary">Categories</h4>
+    <div>
+      <ng-container *ngFor="let category of categoryList">
+        <div class="category-menu general-box justify-content-between p-3 mb-2">
+          <div class="d-flex align-items-center w-100" (click)="toggle(category)">
+            <div class="category-menu__chevron"><i class="fas" [ngClass]="{'fa-chevron-down': category.node.expanded, 'fa-chevron-right': !category.node.expanded}"></i></div>
+            <h5>{{category.node.name}}</h5>
+          </div>
+
+          <div *ngIf="!category.node.expanded">
+            <button class="btn btn-primary btn-sm" (click)="addItem(category)">Add item</button>
+          </div>
+        </div>
+
+        <div class="pl-4 pb-4" *ngIf="category.node.expanded">
+
+          <div class="category__item general-box p-2 mb-2" [ngClass]="{'disabled-catalog-product' : item.node.hidden}" *ngFor="let item of category.node.productConnection.edges; let i = index">
+            <div class="menu-item d-flex flex-grow-1 mb-2">
+              <div *ngIf="item.node.image" class="menu-item__image flex-shrink-0 mr-3" style="background-image: url({{item.node.image}})"></div>
+              <div *ngIf="!item.node.image" class="menu-item__image flex-shrink-0 mr-3" style="background-image: url('assets/images/Item-upload.svg')"></div>
+              <div class="menu-item__info flex-grow-1">
+                <div class="d-flex mb-2 justify-content-between">
+                  <div class="menu-item__info-top">{{item.node.name}}</div>
+                  <div class="menu-item__info-top">{{catalog.currency.code}} {{item.node.price}}</div>
+                </div>
+                <div class="menu-item__info-description">
+                  {{item.node.description.longContent}}
+                </div>
+              </div>
+              <div class="align-self-center cursor-pointer" (click)="removeItem(deleteConfirm, item, category)"><i class="fas fa-trash-alt text-danger"></i></div>
+            </div>
+            <mat-chip-list #chipList aria-label="modifier selection" class="drag-list" [ngClass]="{'empty-box': item.node.modifierConnection.edges.length == 0}" cdkDropList (cdkDropListDropped)="dropModifier($event, item.node.id)" [cdkDropListData]="item.node.modifierConnection.edges">
+              <mat-chip *ngFor="let modifier of item.node.modifierConnection.edges; let index = index" [selectable]="selectable"
+                        [removable]="removable" (removed)="unLinkModifier(modifier.node.id, item, index)">
+                {{modifier.node.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+          <div *ngIf="!category.node.isAddCategoryItem" class="text-right mt-2">
+            <button class="btn btn-primary btn-sm" (click)="addItem(category)">Add item</button>
+          </div>
+        </div>
+        <div class="general-box mb-3" *ngIf="category.node.isAddCategoryItem">
+          <div class="row">
+            <div class="col-md-5 col-sm-12">
+              <div class="file-drop-area pt-4">
+                <input id="image" class="file-input" type="file" accept=".jpeg, .png, .jpg, .gif" (change)="onFileChange($event)" #fileInput>
+                <img src="{{image}}" style="width: 250px; height: 150px;"/>
+              </div>
+              <div class="text-center">
+                <span class="pb-2 text-secondary">PNG, JPG, SVG, GIF max file size 2 Mb.</span>
+                <span class="text-secondary">White or transparent background.</span>
+              </div>
+            </div>
+            <div class="col-md-7 col-sm-12">
+              <form [formGroup]="createItemForm">
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <input type="hidden" class="form-control" formControlName="id" name="id" id="id">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" formControlName="name" name="name" id="name">
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label>Price</label>
+                      <input type="text" class="form-control" formControlName="price" name="price" id="price">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label>Description</label>
+                      <textarea formControlName="description" name="description" style="width: 100%; min-height: 60px;">
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="col-12">
+              <div class="divider-el mt-3 mt-md-0"></div>
+              <div class="button-group d-flex justify-content-end">
+                <button class="btn" style="color: #3647c9;" (click)="cancelCreatingItem(category)">Cancel</button>
+                <button class="btn btn-warning text-white d-flex align-items-center justify-content-center" [disabled]="isCatalogProductLoading || !createItemForm.valid" (click)="createItem(category)">
+                  <span *ngIf="isCatalogProductLoading" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                  <span>Save</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <form class="general-box p-3 d-flex" [formGroup]="createCategoryForm">
+      <input type="text" class="form-control flex-grow-1 mr-2" name="categoryName" formControlName="categoryName">
+      <button class="btn btn-warning text-white px-4 d-flex align-items-center justify-content-center" [disabled]="isCatalogCategoryLoading || !createCategoryForm.valid" (click)="addCategory()">
+        <span *ngIf="isCatalogCategoryLoading" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+        <span>Create</span>
+      </button>
+    </form>
+  </div>
+
+  <div class="mobile-preview d-none d-md-block text-center">
+    <div *ngIf="isModifierView" cdkDropList [cdkDropListData]="modifierList">
+      <h4 class="mb-2 text-primary">Modifiers</h4>
+      <ng-container *ngFor="let modifier of modifierList">
+        <div class="general-box mb-2 pt-2 pb-2 drag-box" cdkDrag>
+          <div class="d-flex justify-content-start align-items-center pl-3 pt-2 pb-2">
+            <div class="mr-3 cursor-pointer" (click)="openModifier(modifier)">
+              <i class="fa" [ngClass]="{'fa-minus-square': modifier.expanded, 'fa-plus-square': !modifier.expanded}" aria-hidden="true" style="font-size: 20px; color: #808080"></i>
+            </div>
+            <span>{{modifier.node.name}}</span>
+          </div>
+          <div *ngIf="modifier.expanded">
+            <div *ngIf="modifier.node.optionConnection.edges.length > 0">
+              <div class="row m-0 p-3 modifier-item" *ngFor="let modifierItem of modifier.node.optionConnection.edges">
+                <div class="col-9 d-flex align-items-center justify-content-between">
+                  <div>{{modifierItem.node.name}}</div>
+                  <div>{{modifierItem.node.price}}</div>
+                </div>
+                <div class="col-3 text-center">
+                  <a class="mr-2 cursor-pointer" (click)="editModifierItem(modifierItem.node.id)"><i class="fas fa-pen text-primary" style="font-size: 13px;"></i></a>
+                  <a class="ml-2 cursor-pointer" (click)="removeModifierItem(modifierItem.node.id)"><i class="fas fa-trash text-danger" style="font-size: 13px;"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2" *ngIf="!modifier.isAddModifierItem">
+              <button class="btn btn-primary btn-sm pl-3 pr-3 pt-2 pb-2" (click)="addModifierItem(modifier)">Add item of {{modifier.node.name}}</button>
+            </div>
+            <div *ngIf="modifier.isAddModifierItem" style="background-color: #f6f7fb;">
+              <form [formGroup]="createModifierItemForm">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="form-group">
+                      <input type="text" class="form-control" formControlName="modifierItemName" name="modifierItemName" id="modifierItemName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <input type="text" class="form-control" formControlName="price" name="price" id="price" placeholder="Price">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <input type="text" class="form-control" formControlName="description" name="description" id="description" placeholder="Description">
+                    </div>
+                  </div>
+                  <div class="col-12 text-left">
+                    <mat-checkbox formControlName="preSelect" color="primary">Pre-select</mat-checkbox>
+                  </div>
+                </div>
+              </form>
+              <div class="divider-el mt-3 mt-md-0"></div>
+              <div class="button-group">
+                <button class="btn btn-outline-primary" (click)="cancelCreateModifierItem(modifier)">Cancel</button>
+                <button class="btn btn-success d-flex align-items-center justify-content-center" [disabled]="isModifierItemsLoading || !createModifierItemForm.valid" (click)="createModifierItem(modifier)">
+                  <span *ngIf="isModifierItemsLoading" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                  <span>Save</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div *ngIf="isAddModifier" class="bg-white">
+        <form [formGroup]="createModifierForm">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <input type="text" class="form-control" formControlName="modifierName" name="modifierName" id="modifierName" placeholder="Eg. Extra toppings, Choose type" style="height: 45px;">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="btn-group btn-group-toggle w-100" ngbRadioGroup formControlName="modifierType">
+                <label class="btn-outline-primary shadow-none" ngbButtonLabel>
+                  <input type="radio" ngbButton [value]="'optional'"> Optional
+                </label>
+                <label class="btn-outline-primary shadow-none" ngbButtonLabel>
+                  <input type="radio" ngbButton [value]="'mandatory'"> Mandatory
+                </label>
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+              <div *ngIf="createModifierForm.get('modifierType').value === 'optional'" class="row align-items-center">
+                <div class="col-7 d-flex align-items-center">
+                  <span class="d-block text-left">Allow adding same choice multiple times</span>
+                  <i class="fa fa-info-circle"></i>
+                </div>
+                <div class="col-5 text-right">
+                  <mat-checkbox formControlName="allowAddingSameChoice" color="primary"></mat-checkbox>
+                </div>
+              </div>
+              <div *ngIf="createModifierForm.get('modifierType').value === 'mandatory'">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <div><span class="mr-3">Force minimum</span><i class="fa fa-info-circle"></i></div>
+                  <input type="text" class="form-control" formControlName="minimum" name="minimum" id="minimum" style="width: 60px;">
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <div><span class="mr-3">Force maximum</span><i class="fa fa-info-circle"></i></div>
+                  <input type="text" class="form-control" formControlName="maximum" name="maximum" id="maximum" style="width: 60px;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="divider-el"></div>
+        <div class="button-group">
+          <button class="btn btn-outline-primary" style="font-size: 15px" (click)="cancelModifier()">Cancel</button>
+          <button class="btn btn-warning text-white d-flex align-items-center justify-content-center" style="font-size: 15px;" [disabled]="isModifierLoading || !createModifierForm.valid" (click)="createModifier()">
+            <span *ngIf="isModifierLoading" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+            <span>Save</span>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="!isAddModifier" class="text-center mt-3">
+        <button class="btn btn-primary text-white pt-2 pb-2 w-100" (click)="addModifier()">Add Modifier</button>
+      </div>
+    </div>
+
+    <div *ngIf="!isModifierView && catalog">
+      <h4 class="mb-3 text-primary">Catalog Preview</h4>
+
+      <div style="position: relative;">
+        <img src="/assets/images/mobileframe.svg" />
+        <div class="pl-5 pr-5 mobile-preview-section">
+          <div *ngIf="!isDetailView" class="category-list-view">
+            <div class="bg-white pt-3 pl-2 pr-2">
+              <div class="text-left">
+                <h5>{{catalog.name}}</h5>
+              </div>
+              <div class="categories-nav">
+                <span *ngFor="let cat of categoryList; let i = index" class="categories-nav__link" [ngClass]="{'categories-nav__link--active': i == catInView}" (click)="scrollTo($event, i)">{{cat.node.name}}</span>
+              </div>
+            </div>
+
+            <div class="pt-3 pb-3 best-price-section">
+              <div class="d-flex justify-content-between bg-white mr-1 border border-primary">
+                <div class="d-flex"><img src="/assets/images/bestprice-black.svg"/></div>
+                <div class="mr-3 mt-2">
+                  <div class="mb-1"><span>10% OFF</span></div>
+                  <div class="best-price-status-bar"></div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between bg-white ml-1 border border-primary">
+                <div class="d-flex"><img src="/assets/images/bestprice-black.svg"/></div>
+                <div class="mr-3 mt-2">
+                  <div class="mb-1"><span>20% OFF</span></div>
+                  <div class="best-price-status-bar"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="categoryList" class="category-list">
+              <ng-container *ngFor="let category of categoryList">
+                <div class="bg-white mb-2">
+                  <div class="category-name text-left pl-3 pr-3"><h5>{{category.node.name}}</h5></div>
+
+                  <div *ngIf="category.node.productConnection.edges.length > 0">
+                    <div *ngFor="let item of category.node.productConnection.edges; let i = index">
+                      <div *ngIf="!item.node.hidden" class="category__item d-flex align-items-center p-2" (click)="viewItemDetail(item.node.id)">
+                        <div class="menu-item" style="display: inline-grid; grid-template-columns: auto auto;">
+                          <div *ngIf="item.node.image" class="menu-item__image flex-shrink-0 mr-2" style="background-image: url({{item.node.image}});"></div>
+                          <div *ngIf="!item.node.image" class="menu-item__image flex-shrink-0 mr-2" style="background-image: url('assets/images/Item-upload.svg');"></div>
+                          <div class="menu-item__info flex-grow-1 text-left">
+                            <div class="menu-item__info-top mb-2">{{item.node.name}}</div>
+                            <div class="menu-item__info-description mb-2">
+                              {{item.node.description.longContent}}
+                            </div>
+                            <div class="menu-item__info-top">{{catalog.currency.code}} {{item.node.price}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="category.node.productConnection.edges.length == 0">
+                    <p class="category-no-item">Add at least one item so that the category appears in the menu</p>
+                  </div>
+
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+          <div *ngIf="isDetailView && selectedCategoryItem" class="product-container text-left">
+            <div class="nav-back" (click)="back()"><i class="fas fa-chevron-left"></i></div>
+            <div *ngIf="selectedCategoryItem.image" class="product-container__image" style="background-image: url({{selectedCategoryItem.image}})"></div>
+            <div class="pt-3" *ngIf="!selectedCategoryItem.image" >
+              <img src="assets/images/Item-upload.svg" style="width: 100%; height: 8rem;"/>
+            </div>
+            <div class="product-container__title">{{selectedCategoryItem.name}}</div>
+
+            <div class="product-container__description">{{selectedCategoryItem.description.longContent}}</div>
+
+            <div class="catalog-modifiers-block" *ngIf="selectedCategoryItem.modifierConnection">
+              <div class="catalog-modifier" *ngFor="let modifier of selectedCategoryItem.modifierConnection.edges;">
+                <div class="card-list__item">
+                  <div class="item-title">{{modifier.node.name}}</div>
+                </div>
+                <div class="modifier-items">
+                  <label class="card-list__item_child align-items-center" *ngFor="let item of modifier.node.optionConnection.edges;">
+                    <span *ngIf="!modifier.node.multiple" class="item-pre"><mat-checkbox color="primary" [(ngModel)]="item.node.checked"></mat-checkbox></span>
+                    <span *ngIf="modifier.node.multiple && item.node.quantity !== 0" class="item-pre">{{item.node.quantity}}x</span>
+                    <div class="item-title">{{item.node.name}}</div>
+                    <div *ngIf="!modifier.node.multiple" class="item-hint">+{{item.node.price}} {{catalog.currency.code}}</div>
+                    <div *ngIf="modifier.node.multiple" class="item-hint">+{{item.node.price * item.node.quantity}} {{catalog.currency.code}}</div>
+                    <div *ngIf="modifier.node.multiple" class="btn-group btn-group-sm ml-2">
+                      <button class="btn btn-outline-primary btn-group__btn btn-primary--focus" (click)="decrementModifierItem(item)"><i class="fas fa-minus"></i></button>
+                      <button class="btn btn-outline-primary btn-group__btn btn-primary--focus" (click)="incrementModifierItem(item)"><i class="fas fa-plus"></i></button>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #deleteConfirm let-modal>
+  <div class="modal-body d-flex justify-content-center mt-5 mb-2">
+    <span>Do you want to delete this product?</span>
+  </div>
+  <div class="modal-footer d-flex justify-content-center border-0 mb-2">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close('no')">No</button>
+    <button type="submit" class="btn btn-warning text-white" (click)="modal.close('yes')">Yes</button>
+  </div>
+</ng-template>
+
+
+
+

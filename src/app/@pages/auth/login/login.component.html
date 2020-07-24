@@ -1,0 +1,70 @@
+<div class="login-container">
+  <img alt="" src="assets/images/DeliverAiwhite.svg">
+
+  <div class="login-box general-box my-4">
+    <div class="modal-header justify-content-center d-md-block d-none">
+      <h3 class="text-dark font-weight-normal text-center p-2">Sign In</h3>
+    </div>
+
+    <div class="modal-body text-center p-md-3">
+      <form (ngSubmit)="submit()" [formGroup]="form">
+        <p *ngIf="showErrorMessage" class="alert alert-danger" style="font-size: 13px; max-width: 100%;">
+          Incorrect email or password.
+        </p>
+
+        <div class="form-group">
+          <div class="form-control-prepend">
+            <span class="prepend-item"><i class="fas fa-envelope"></i></span>
+            <input class="form-control"
+            [ngClass]="{
+            'is-invalid': (form.get('email').touched || form.get('email').dirty) && form.get('email').invalid,
+            'is-valid': form.get('email').valid}"
+            formControlName="email" placeholder="E-mail" type="text">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-control-prepend">
+            <span class="prepend-item"><i class="fas fa-key"></i></span>
+            <input class="form-control"
+            [ngClass]="{
+              'is-invalid': (form.get('password').touched || form.get('password').dirty) && form.get('password').invalid,
+              'is-valid': form.get('password').valid}"
+             formControlName="password" placeholder="Password" type="password">
+          </div>
+        </div>
+
+        <div class="form-group d-md-block d-none">
+          <div class="form-check mb-md-3 mb-sm-0 text-left">
+            <div class="form-control-prepend">
+              <input class="form-check-input mt-0 form-check-remember" formControlName="rememberMe" id="remember-me" type="checkbox">
+              <label class="form-check-label" for="remember-me">Remember me</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-warning w-100 text-white d-flex align-items-center justify-content-center" [disabled]="isLoading || !form.valid" type="submit">
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+            <span>SIGN IN</span>
+          </button>
+        </div>
+
+        <div class="form-group d-md-block d-flex justify-content-between">
+          <div class="form-check mb-md-3 mb-sm-0 d-md-none d-block">
+            <div class="form-control-prepend">
+              <input class="form-check-input mt-0 form-check-remember" formControlName="rememberMe" id="remember-me" type="checkbox">
+              <label class="form-check-label" for="remember-me">Remember me</label>
+            </div>
+          </div>
+          <a [routerLink]="['/auth/forgot-password']" class="text-primary">Forgot password?</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <span class="text-white">
+    Don't have account?
+    <a [routerLink]="['/auth/registration']" class="text-warning">Sign Up</a>
+  </span>
+</div>

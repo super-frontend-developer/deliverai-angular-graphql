@@ -1,0 +1,63 @@
+<div class="login-container">
+
+
+  <img alt="" src="assets/images/DeliverAiwhite.svg">
+
+  <div class="login-box general-box my-4">
+    <div class="modal-header justify-content-center d-md-block d-none">
+      <h3 class="text-dark font-weight-normal text-center p-2">Sign Up</h3>
+    </div>
+    <div class="modal-body text-center p-md-3">
+      <form (ngSubmit)="submit()" [formGroup]="form">
+        <ng-container formGroupName="name">
+          <div class="form-group">
+            <div class="form-control-prepend">
+              <span class="prepend-item"><i class="fas fa-user"></i></span>
+              <input class="form-control" formControlName="given" placeholder="First Name" type="text">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-control-prepend">
+              <span class="prepend-item"><i class="fas fa-user"></i></span>
+              <input class="form-control" formControlName="family" placeholder="Last Name" type="text">
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="form-group">
+          <div class="form-control-prepend">
+            <span class="prepend-item"><i class="fas fa-envelope"></i></span>
+            <input class="form-control"
+            [ngClass]="{
+              'is-invalid': (form.get('email').touched || form.get('email').dirty) && form.get('email').invalid,
+              'is-valid': form.get('email').valid}"
+            formControlName="email" placeholder="E-mail" type="text">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-control-prepend">
+            <span class="prepend-item"><i class="fas fa-key"></i></span>
+            <input class="form-control"
+            [ngClass]="{
+              'is-invalid': (form.get('password').touched || form.get('password').dirty) && form.get('password').invalid,
+              'is-valid': form.get('password').valid}"
+            formControlName="password" placeholder="Password" type="password">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button [disabled]="isLoading || !form.valid" class="btn btn-warning w-100 text-white d-flex align-items-center justify-content-center" type="submit">
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+            <span>SIGN UP</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <span class="text-white">Already have an account? <a [routerLink]="['/auth/login']" class="text-warning">Sign In</a></span>
+
+</div>
+

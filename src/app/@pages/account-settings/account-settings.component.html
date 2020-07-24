@@ -1,0 +1,62 @@
+<header class="d-block d-sm-block d-md-none">
+  <div class="d-flex align-items-center justify-content-between h-100">
+    <h1>Account Settings</h1>
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</header>
+
+<div class="d-md-flex d-sm-none d-none">
+  <div style="width: 90%;">
+    <header>
+      <div class="d-flex align-items-center">
+        <h1>Account Settings</h1>
+      </div>
+    </header>
+  </div>
+
+  <div class="d-flex align-items-center pl-2" style="width: 10%; border-bottom: solid #d8d8d8 1px; border-left: solid #d8d8d8 1px;">
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="form-content" style="width: 500px;">
+    <div *ngIf="currentUser" class="card-content bg-white">
+      <div class="card-body">
+        <div class="d-flex justify-content-center mt-3 mb-3">
+          <div class="profile-picture">
+            <img width=100 height=100 src="{{avatar}}" />
+            <label for="uploader-input" [ngClass]="{'drag-over': hasDragOver}">
+              <div class="info-text"></div>
+            </label>
+            <input type="file" id="uploader-input" style="display:none" accept=".jpeg, .png, .jpg, .gif" (change)="onFileChange($event)" #fileInput/>
+          </div>
+        </div>
+        <form [formGroup]="accountForm" style="font-size: 15px;">
+          <input type="hidden" class="form-control" formControlName="id" name="id" id="id">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" formControlName="first_name" name="first_name" id="first_name">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" formControlName="last_name" name="last_name" id="last_name">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" formControlName="email" name="email" id="email" placeholder="email@domain.com">
+          </div>
+          <a href="/auth/reset" style="color: blue;">Change password</a>
+        </form>
+      </div>
+      <div class="divider-el"></div>
+      <div class="button-group d-flex justify-content-end">
+        <button class="btn pl-4 pr-4" style="color: blue; font-size: 15px" (click)="cancel()">Cancel</button>
+        <button class="btn btn-warning text-white d-flex align-items-center justify-content-center pl-4 pr-4" style="font-size: 15px" [disabled]="isLoading || !accountForm.valid" (click)="save()">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+          <span>Save</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

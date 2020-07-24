@@ -1,0 +1,75 @@
+:host {
+  .service-content {
+    background-color: #ffffff;
+  }
+
+  .btn-group > .btn.active,
+  .btn-group > .btn:hover {
+    z-index: 0;
+  }
+
+  span,
+  button {
+    font-size: 16px;
+  }
+
+  .mat-icon-button {
+    width: 20px;
+  }
+
+  ::ng-deep {
+    .mat-checkbox-label {
+      color: #a3a3a3 !important;
+    }
+
+    .workinghours-content {
+      .switch {
+        width: 90px;
+        min-height: 35px;
+      }
+
+      .switch small {
+        top: 2px;
+      }
+
+      .switch .switch-pane {
+        top: 2px;
+      }
+
+      .switch.switch-medium > .switch-pane .switch-label-checked {
+        font-size: 14px;
+      }
+
+      .switch.switch-medium > .switch-pane .switch-label-unchecked {
+        font-size: 14px;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .service-content {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .service-content {
+      width: 650px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    button,
+    span {
+      font-size: 13px;
+    }
+
+    label {
+      font-size: 12px;
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+}

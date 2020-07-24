@@ -1,0 +1,56 @@
+query CatalogModifierConnection(
+    $business: ID
+    $catalog: ID
+    $first: PositiveInt
+    $after: RelayCursor
+
+    $last: PositiveInt
+    $before: RelayCursor
+
+    $offset: NonNegativeInt
+    $limit: PositiveInt
+) {
+    catalogModifierConnection(
+        business: $business
+        catalog: $catalog
+        first: $first
+        after: $after
+
+        last: $last
+        before: $before
+
+        offset: $offset
+        limit: $limit
+    ) {
+        edges {
+            node {
+                id
+                name
+                shared
+                optionConnection {
+                    edges {
+                        node {
+                            id
+                            name
+                            price
+                        }
+                    }
+                }
+                productConnection {
+                    edges {
+                        node {
+                            id
+                            name
+                            description {
+                                longContent
+                                shortContent
+                            }
+                            price
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

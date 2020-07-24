@@ -1,0 +1,176 @@
+mutation CreateSharedCatalogModifier(
+    $catalog: ID!
+    $name: String!
+    $minQuantity: NonNegativeInt
+    $maxQuantity: PositiveInt
+    $multiple: Boolean
+) {
+    createSharedCatalogModifier(
+        input: {
+            catalog: $catalog,
+            name: $name,
+            minQuantity: $minQuantity,
+            maxQuantity: $maxQuantity,
+            multiple: $multiple
+        }
+    ) {
+        id
+        name
+        shared
+        optionConnection {
+            edges {
+                node {
+                    id
+                    name
+                    price
+                }
+            }
+        }
+        productConnection {
+            edges {
+                node {
+                    id
+                    name
+                    description {
+                        longContent
+                        shortContent
+                    }
+                    price
+                }
+            }
+        }
+    }
+}
+
+mutation UpdateCatalogModifier(
+    $id: ID!
+    $name: String!
+    $minQuantity: NonNegativeInt
+    $maxQuantity: PositiveInt
+    $multiple: Boolean
+    $hidden: Boolean
+) {
+    updateCatalogModifier(
+        input: {
+            id: $id,
+            name: $name,
+            minQuantity: $minQuantity,
+            maxQuantity: $maxQuantity,
+            hidden: $hidden,
+            multiple: $multiple
+        }
+    ) {
+        id
+        name
+        shared
+        optionConnection {
+            edges {
+                node {
+                    id
+                    name
+                    price
+                }
+            }
+        }
+        productConnection {
+            edges {
+                node {
+                    id
+                    name
+                    description {
+                        longContent
+                        shortContent
+                    }
+                    price
+                }
+            }
+        }
+    }
+}
+
+mutation LinkCatalogModifier(
+    $modifier: ID!
+    $product: ID!
+) {
+    linkCatalogModifier(
+        input: {
+            modifier: $modifier,
+            product: $product
+        }
+    )
+}
+
+mutation UnlinkCatalogModifier(
+    $modifier: ID!
+    $product: ID!
+) {
+    unlinkCatalogModifier(
+        input: {
+            modifier: $modifier,
+            product: $product
+        }
+    )
+}
+
+mutation DeleteCatalogModifier(
+    $id: ID!
+) {
+    deleteCatalogModifier(
+        input: {
+            id: $id
+        }
+    )
+}
+
+mutation CreateCatalogModifierOption(
+    $modifier: ID!
+    $name: String!
+    $description: String
+    $price: BigFloat!
+    $quantity: Int
+) {
+    createCatalogModifierOption(
+        input: {
+            modifier: $modifier,
+            name: $name,
+            description: $description,
+            price: $price,
+            quantity: $quantity
+        }
+    ) {
+        id
+        name
+        price
+    }
+}
+
+mutation UpdateCatalogModifierOption(
+    $id: ID!
+    $name: String
+    $description: String
+    $price: BigFloat
+) {
+    updateCatalogModifierOption(
+        input: {
+            id: $id,
+            name: $name,
+            description: $description,
+            price: $price
+        }
+    ) {
+        id
+        name
+        description
+        price
+    }
+}
+
+mutation DeleteCatalogModifierOption(
+    $id: ID!
+) {
+    deleteCatalogModifierOption(
+        input: {
+            id: $id
+        }
+    )
+}

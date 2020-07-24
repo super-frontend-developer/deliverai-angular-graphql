@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+// .content-stretch {
+//   display: flex;
+//   align-items: stretch;
+//   align-self: stretch;
+
+//   > .card-content {
+//     width: 100%;
+//   }
+
+// }
+
+.card-content {
+  width: 100%;
+  margin: 18px 0;
+}
+
+.general-box,
+%general-box {
+  background-color: #ffffff;
+  border-width: 0;
+  border-radius: 4px;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.form-label {
+  color: #525359;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+//
+// Description:
+//
+//    This file contains CSS helper classes
+//

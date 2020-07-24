@@ -1,0 +1,9 @@
+:host {
+  @media (max-width: 768px) {
+    .main-content {
+      h1 {
+        font-size: 24px;
+      }
+    }
+  }
+}

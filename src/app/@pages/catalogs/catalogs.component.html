@@ -1,0 +1,114 @@
+<header class="header d-block d-sm-block d-md-none">
+  <div class="d-flex align-items-center justify-content-between h-100">
+    <h1>Catalogs</h1>
+    <div class="d-flex align-items-center">
+      <app-business-store-dropdown></app-business-store-dropdown>
+    </div>
+  </div>
+</header>
+
+<div class="d-md-flex d-sm-none d-none">
+  <div style="width: 90%;">
+    <header class="flex-wrap header justify-content-between">
+      <div><h1>Catalogs</h1></div>
+      <div><button class="btn btn-primary add-catalog-btn" (click)="addMenu(editMenu, 'add', null)">Add catalog</button></div>
+    </header>
+  </div>
+
+  <div class="d-flex align-items-center pl-2" style="width: 10%; border-bottom: solid #d8d8d8 1px; border-left: solid #d8d8d8 1px;">
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</div>
+
+<div class="main-content">
+
+  <div class="table-responsive mat-elevation-z8 mb-2">
+    <table class="table general-box w-100 m-0">
+      <thead>
+        <tr>
+          <th class="text-nowrap" [ngClass]="lg" scope="col">NAME</th>
+          <th class="text-nowrap" [ngClass]="lg" scope="col">CREATED AT</th>
+          <th class="text-nowrap" [ngClass]="lg" scope="col">CURRENCY</th>
+          <th class="text-nowrap" [ngClass]="sm" scope="col">MENU</th>
+          <th class="text-nowrap" scope="col">STATUS</th>
+          <th class="text-right" [ngClass]="sm" scope="col"><div class="nav-item__icon" (click)="addMenu(editMenu, 'add', null)"><i class="fas fa-plus-circle" style="font-size: 16px;"></i></div></th>
+        </tr>
+        </thead>
+        <tbody *ngIf="!loadingCatalogs">
+          <tr *ngFor="let catalog of catalogList">
+            <td class="text-nowrap" [ngClass]="lg"><ngb-highlight [result]="catalog.node.name"></ngb-highlight></td>
+            <td class="text-nowrap" [ngClass]="lg">{{ catalog.node.createdAt | date }}</td>
+            <td class="text-nowrap" [ngClass]="lg">{{ catalog.node.currency.code }}</td>
+            <td class="pl-2 pr-2 pt-2 pb-2" [ngClass]="sm">
+              <div class="text-primary mb-1">{{catalog.node.name}}</div>
+              <div class="mb-1">{{ catalog.node.createdAt | date }}</div>
+            </td>
+            <td class="pl-2 pr-2 pt-2 pb-2"><span class="status-tag px-2 py-1" [ngClass]="{'bg-success': true}">Active</span></td>
+
+            <td class="text-nowrap text-right">
+              <a [routerLink]="['/catalogs/', catalog.node.id]" class="border border-primary rounded pt-2 pb-2 pl-4 pr-4 ml-3 align-self-center d-md-inline-block d-none" >View</a>
+              <div class="ml-3 align-self-center d-inline-block d-md-none" [routerLink]="['/catalogs/', catalog.node.id]"><i class="fas fa-eye text-primary"></i></div>
+              <div class="ml-3 align-self-center d-inline-block cursor-pointer" (click)="addMenu(editMenu, 'edit', catalog)"><i class="fas fa-pen text-primary"></i></div>
+              <div class="mx-3 align-self-center d-inline-block cursor-pointer" (click)="deleteMenu(deleteConfirm, catalog.node.id)"><i class="fas fa-trash text-danger"></i></div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="loadingCatalogs">
+          <tr>
+            <td colspan="5">
+              <mat-progress-spinner class="mt-2" mode="indeterminate" diameter="30" style="position: relative; left: 50%; right: 50%">
+              </mat-progress-spinner>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="!loadingCatalogs && catalogList.length === 0">
+          <tr>
+            <td colspan="5" class="text-center">
+              <span>No catalogs data</span>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="catalogList.length" [page]="1" aria-label="Default pagination"></ngb-pagination>
+  </div>
+
+</div>
+
+<ng-template #editMenu let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{editMode == 'add' ? 'Add' : 'Edit'}} Catalog</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="createCatalogForm">
+      <label class="d-block mt-4 mb-4">
+        <div class="form-label mb-1">Catalog Name</div>
+        <input type="text" name="name" class="form-control" formControlName="name">
+      </label>
+      <label class="d-block mt-4 mb-4">
+        <div class="form-label mb-1">Currency</div>
+        <select class="form-control" formControlName="currency" name="currency">
+          <option value="">Select Option</option>
+          <option *ngFor="let item of currencyList" [value]="item.code">{{item.symbol}}</option>
+        </select>
+      </label>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close('cancel')">Cancel</button>
+    <button type="submit" class="btn btn-success" (click)="modal.close('add')" [disabled]="!createCatalogForm.valid">{{editMode == 'add' ? 'Create' : 'Save'}}</button>
+  </div>
+</ng-template>
+
+<ng-template #deleteConfirm let-modal>
+  <div class="modal-body d-flex justify-content-center mt-5 mb-2">
+    <span>Do you want to delete this catalog?</span>
+  </div>
+  <div class="modal-footer d-flex justify-content-center border-0 mb-2">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close('no')">No</button>
+    <button type="submit" class="btn btn-warning text-white" (click)="modal.close('yes')">Yes</button>
+  </div>
+</ng-template>

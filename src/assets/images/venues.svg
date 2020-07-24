@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="20px" viewBox="0 0 22 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>ico_venues</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Loyalty" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Loyalty-list" transform="translate(-19.000000, -288.000000)" fill="#FFFFFF">
+            <g id="Nav" transform="translate(-4.000000, 0.000000)">
+                <g id="Venues" transform="translate(4.000000, 268.000000)">
+                    <g id="ico_venues" transform="translate(19.000000, 20.000000)">
+                        <path d="M18,19 L14,19 L14,11 L18,11 L18,19 Z M11,16 L4,16 L4,11 L11,11 L11,16 Z M17.575,7.245 C16.689,8.312 15.317,9 14,9 C12.889,9 11.822,8.586 11,7.849 C10.179,8.585 9.111,9 8,9 C6.682,9 5.31,8.312 4.424,7.244 C3.945,7.634 3.306,8 2.5,8 C1.963,8 1.455,7.875 1,7.657 L1,19.5 C1,19.775 1.224,20 1.5,20 L13.5,20 L18.5,20 L20.5,20 C20.776,20 21,19.775 21,19.5 L21,7.657 C20.544,7.875 20.037,8 19.5,8 C18.692,8 18.065,7.648 17.575,7.245 L17.575,7.245 Z" id="Fill-2042"></path>
+                        <path d="M18,4 L18,6.284 C18.536,6.781 18.993,7 19.5,7 C20.878,7 22,5.878 22,4.5 L22,4 L18,4 Z" id="Fill-2043"></path>
+                        <polygon id="Fill-2044" points="21.6904 3 20.1904 0 16.9714 0 17.8724 3"></polygon>
+                        <polygon id="Fill-2045" points="4.7656 0 1.8086 0 0.3086 3 4.0986 3"></polygon>
+                        <polygon id="Fill-2046" points="10.5 0 5.79 0 5.123 3 10.5 3"></polygon>
+                        <polygon id="Fill-2047" points="15.9277 0 11.4997 0 11.4997 3 16.8277 3"></polygon>
+                        <path d="M4,6.2842 L4,4.0002 L0,4.0002 L0,4.5002 C0,5.8782 1.121,7.0002 2.5,7.0002 C3.007,7.0002 3.465,6.7812 4,6.2842" id="Fill-2048"></path>
+                        <path d="M17,6.3389 L17,3.9999 L11.5,3.9999 L11.5,6.9359 C12.158,7.6109 13.058,7.9999 14,7.9999 C15.134,7.9999 16.32,7.3349 17,6.3389" id="Fill-2049"></path>
+                        <path d="M8,8 C8.943,8 9.842,7.611 10.5,6.936 L10.5,4 L5,4 L5,6.339 C5.679,7.335 6.865,8 8,8" id="Fill-2050"></path>
+                        <path d="M16.5,16 C16.776,16 17,15.776 17,15.5 C17,15.224 16.776,15 16.5,15 C16.224,15 16,15.224 16,15.5 C16,15.776 16.224,16 16.5,16" id="Fill-2051"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

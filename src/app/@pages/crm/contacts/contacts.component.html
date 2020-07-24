@@ -1,0 +1,79 @@
+<header class="flex-wrap">
+
+  <h1>Contacts</h1>
+  <div class="form-control-prepend ml-4">
+    <span class="prepend-item"><i class="fas fa-search" style="color: #1c2a6b;"></i></span>
+    <input class="form-control" type="text" name="search" id="search" placeholder="search by name, phone or email" (keyup)="applyFilter($event)">
+  </div>
+
+  <div class="flex-grow-1"></div>
+
+  <div class="dropdown btn-group" style="margin-right: 18vh" ngbDropdown>
+    <button type="button" class="btn bg-primary text-white">Add Contact</button>
+    <button type="button" class="btn bg-primary text-white dropdown-toggle
+      dropdown-arrow" ngbDropdownToggle aria-haspopup="true"
+      aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div ngbDropdownMenu class="dropdown-menu" role="menu">
+      <a class="dropdown-item text-primary">Import</a>
+      <a class="dropdown-item text-primary" (click)="create()">Add Contact</a>
+    </div>
+  </div>
+</header>
+
+<div class="main-content">
+  <div class="mat-elevation-z8 data-table">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
+        <td mat-cell *matCellDef="let row"> {{row.first_name}} {{row.last_name}}
+        </td>
+      </ng-container>
+
+      <!-- Phone number Column -->
+      <ng-container matColumnDef="phone_number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> PHONE NUMBER </th>
+        <td mat-cell *matCellDef="let row"> {{row.phone_number}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> EMAIL </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      </ng-container>
+
+      <!-- Group Column -->
+      <ng-container matColumnDef="group">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> GROUP </th>
+        <td mat-cell *matCellDef="let row"> {{row.group}} </td>
+      </ng-container>
+
+      <!-- Source Column -->
+      <ng-container matColumnDef="source">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> SOURCE </th>
+        <td mat-cell *matCellDef="let row"> {{row.source}} </td>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="update(row)">
+            <mat-icon class="mat-18" style="color: grey;">edit</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="delete(row.id)">
+            <mat-icon class="mat-18">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+  </div>
+</div>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>

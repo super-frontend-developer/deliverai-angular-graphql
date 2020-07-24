@@ -1,0 +1,43 @@
+<div>
+  <form [formGroup]="contactForm">
+    <input type="hidden" class="form-control" formControlName="id" name="id" id="id">
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" formControlName="first_name" name="first_name" id="first_name">
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" formControlName="last_name" name="last_name" id="last_name">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" formControlName="email" name="email" id="email">
+    </div>
+    <div class="form-group">
+      <label>Phone</label>
+      <input type="text" class="form-control" formControlName="phone_number" name="phone_number" id="phone_number">
+    </div>
+    <div class="form-group">
+      <label>Group</label>
+      <select class="form-control" formControlName="group" name="group">
+        <option>Select</option>
+        <option>Demo</option>
+        <option>Demo1</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Source</label>
+      <select class="form-control" formControlName="source" name="source">
+        <option>Select</option>
+        <option>Facebook</option>
+        <option>LinkedIn</option>
+      </select>
+    </div>
+  </form>
+  <div class="divider-el"></div>
+  <div class="button-group">
+    <button class="btn" style="color: #1c2a6b;" (click)="cancel()">Cancel</button>
+    <button *ngIf="!isAddMode" class="btn btn-warning text-white" (click)="save()">Save</button>
+    <button *ngIf="isAddMode" class="btn btn-warning text-white" (click)="create()">CREATE</button>
+  </div>
+</div>

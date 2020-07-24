@@ -1,0 +1,77 @@
+<header class="d-block d-sm-block d-md-none">
+  <div class="d-flex align-items-center justify-content-between h-100">
+    <h1>Settings</h1>
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</header>
+
+<div class="d-md-flex d-sm-none d-none">
+  <div style="width: 90%;">
+    <header>
+      <h1>Settings</h1>
+    </header>
+  </div>
+
+  <div class="d-flex align-items-center pl-2" style="width: 10%; border-bottom: solid #d8d8d8 1px; border-left: solid #d8d8d8 1px;">
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</div>
+
+<div class="main-content pt-2">
+  <div class="card-content bg-white">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
+          <h6>Orders Management</h6>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 pt-2 d-none d-md-block">
+          <div class="row">
+            <div class="col-md-3 col-sm-12 pt-2 delivery-order">
+              <div class="status-dot mr-2" [ngClass]="{'status-dot--active' : !deliveryEnable}"></div>
+              <span [ngClass]="{'order-enable' : deliveryEnable}">Delivery</span>
+            </div>
+            <div class="col-md-3 col-sm-12 pt-2 pickup-order">
+              <div class="status-dot mr-2" [ngClass]="{'status-dot--active' : !pickupEnable}"></div>
+              <span [ngClass]="{'order-enable' : pickupEnable}">Pick Up</span>
+            </div>
+            <!-- <div class="col-md-6 col-sm-12 pt-2 auto-order">
+              <div class="status-dot mr-2" [ngClass]="{'status-dot--active' : autoEnable}"></div>
+              <span [ngClass]="{'order-enable' : autoEnable}">Auto Order Acceptance</span>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="pl-sm-2 pl-md-4 pt-4">
+        <div class="pt-3 pb-3">
+          <ui-switch size="small" defaultBgColor="red" checkedLabel="Yes" uncheckedLabel="No" checkedTextColor="#ffffff" uncheckedTextColor="#ffffff" [(ngModel)]="deliveryEnable"></ui-switch>
+          <span class="ml-3" style="color: #525359;">Accept Delivery Orders</span>
+        </div>
+        <div class="pt-3 pb-3">
+          <ui-switch size="small" defaultBgColor="red" checkedLabel="Yes" uncheckedLabel="No" checkedTextColor="#ffffff" uncheckedTextColor="#ffffff" [(ngModel)]="pickupEnable"></ui-switch>
+          <span class="ml-3" style="color: #525359;">Accept Pickup Orders</span>
+        </div>
+        <!-- <div class="pt-3 pb-3">
+          <ui-switch size="small" defaultBgColor="red" checkedLabel="Yes" uncheckedLabel="No" checkedTextColor="#ffffff" uncheckedTextColor="#ffffff" [(ngModel)]="autoEnable"></ui-switch>
+          <span class="ml-3" style="color: #525359;">Auto Orders Acceptance</span>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- <div class="card-content bg-white mt-3 pb-3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+          <h6>Loyalty</h6>
+        </div>
+        <div class="d-none d-md-flex justify-content-md-end justify-content-sm-start col-lg-6 col-md-12 col-sm-12 pt-3">
+          <div class="status-dot mr-2" [ngClass]="{'status-dot--active' : loyaltyEnable}"></div>
+          <span [ngClass]="{'loyalty-off' : loyaltyEnable}">Turn off Loyalty points</span>
+        </div>
+      </div>
+      <div class="pl-sm-2 pl-md-4 pt-4">
+        <ui-switch size="small" defaultBgColor="red" checkedLabel="Yes" uncheckedLabel="No" checkedTextColor="#ffffff" uncheckedTextColor="#ffffff" [(ngModel)]="loyaltyEnable"></ui-switch>
+        <span class="ml-3" style="color: #525359;">Loyalty</span>
+      </div>
+    </div>
+  </div> -->
+</div>

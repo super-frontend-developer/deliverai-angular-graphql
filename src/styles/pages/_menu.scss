@@ -1,0 +1,417 @@
+@charset "utf-8";
+
+.mobile-preview {
+  @extend %right-panel;
+
+  width: 442px;
+  padding: $padding;
+
+  border-left: solid #d8d8d8 1px;
+}
+
+.mobile-preview-section {
+  position: absolute;
+  top: 60px;
+
+  width: 100%;
+
+  .best-price-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    img {
+      width: 55px;
+      height: 55px;
+    }
+
+    .best-price-status-bar {
+      width: 63px;
+      height: 10px;
+
+      background-color: #d8d8d8;
+      border-radius: 5px;
+    }
+  }
+}
+
+.category-menu {
+  display: flex;
+  align-items: center;
+
+  &__chevron {
+    width: 36px;
+    height: 32px;
+
+    color: $primary;
+    font-size: 24px;
+
+    cursor: pointer;
+
+    * {
+      vertical-align: middle;
+    }
+
+  }
+}
+
+.categories-nav {
+  /* Positioning */
+  position: sticky;
+  top: 0;
+
+  /* Box Model */
+  display: flex;
+  flex-wrap: nowrap;
+  box-sizing: content-box;
+  padding-top: 5px;
+  padding-bottom: 5px;;
+
+  /* Visual */
+  overflow-y: auto;
+
+  white-space: nowrap;
+
+  background-color: #fff;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /* Visual */
+    background-color: #dfe2e7;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #ccc;
+  }
+
+  &__link {
+    /* Box Model */
+    margin: 0 4px;
+    padding: 3px 10px;
+
+    /* Typography */
+    color: $primary;
+    font-weight: 600;
+    font-size: 12px;
+
+    /* Visual */
+    background-color: #fff;
+    border: solid $primary 2px;
+    border-radius: 15px;
+    cursor: pointer;
+
+    &--active {
+      /* Typography */
+      color: #fff;
+
+      /* Visual */
+      background-color: $primary;
+    }
+  }
+
+}
+
+.category-list {
+  height: 510px;
+  overflow-y: auto;
+}
+
+.category-list::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-item {
+  &__image {
+    width: 64px;
+    height: 64px;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 4px;
+  }
+
+  &__info {
+    &-top {
+      color: $primary;
+      font-size: 16px;
+    }
+
+    &-description {
+      color: $dark;
+      font-size: 13px;
+      font-style: italic;
+    }
+  }
+}
+
+.category-no-item {
+  padding-top: 20px;
+  padding-right: 40px;
+  padding-bottom: 25px;
+  padding-left: 40px;
+
+  font-size: 13px;
+  text-align: center;
+}
+
+.nav-back {
+  /* Positioning */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+
+  /* Typography */
+  font-size: 26px;
+
+  cursor: pointer;
+
+  &--primary {
+    color: $primary;
+  }
+
+  &__label {
+    /* Box Model */
+    padding-left: 4px;
+
+    /* Typography */
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+}
+
+.product-container::-webkit-scrollbar {
+  display: none;
+}
+
+.product-container {
+  position: relative;
+
+  height: 680px;
+  overflow-y: auto;
+
+  &__image {
+    /* Positioning */
+    position: relative;
+
+    /* Box Model */
+    padding-bottom: 75%;
+
+    /* Visual */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  &__quantity {
+    /* Positioning */
+    position: sticky;
+    bottom: 0;
+
+    /* Box Model */
+    margin-top: 14px;
+    padding: 10px 14px;
+
+    /* Visual */
+    background-color: #fff;
+
+    .btn-group {
+      /* Box Model */
+      justify-items: stretch;
+      height: 51px;
+
+      &__btn {
+        border-width: 2px;
+      }
+
+    }
+
+  }
+
+  &__title {
+    /* Box Model */
+    padding: 10px 0;
+
+    /* Typography */
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  &__description {
+    /* Box Model */
+    padding: 0 0 10px;
+
+    /* Typography */
+    color: #808080;
+    font-size: 16px;
+
+    /* Visual */
+    border-bottom: solid #ebedf2 15px;
+
+  }
+
+}
+
+.required-section {
+  /* Box Model */
+  display: inline-block;
+  padding: 4px 8px;
+
+  /* Typography */
+  font-weight: bold;
+  font-size: 9px;
+  vertical-align: middle;
+
+  /* Visual */
+  border: solid 1px;
+  border-radius: 4px;
+
+  &--green {
+    /* Typography */
+    color: #008000;
+
+    /* Visual */
+    border-color: #008000;
+
+  }
+
+}
+
+
+.card-list__item {
+  /* Box Model */
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 14px;
+
+  cursor: pointer;
+
+  //align-items: center;
+
+  &--bordered {
+    border-bottom: solid #e7e8ec 1px;
+  }
+
+  &.justify-left {
+    justify-content: flex-start;
+  }
+
+
+  .item-hint {
+    /* Typography */
+    font-weight: normal;
+    line-height: 18px;
+  }
+
+  .item-pre {
+    /* Box Model */
+    display: flex;
+    align-items: center;
+    width: 25px;
+  }
+
+}
+
+.card-list__item_child {
+  /* Box Model */
+  display: flex;
+  padding: 14px;
+
+  /* Typography */
+  font-size: 14px;
+
+  /* Visual */
+  border-bottom: solid #e7e8ec 1px;
+
+  &:first-child {
+    border-top: solid #e7e8ec 1px;
+  }
+
+  .item-title {
+    flex: 1;
+
+    /* Typography */
+    font-weight: normal;
+    font-size: 14px;
+  }
+
+  .item-hint {
+    line-height: 14px;
+  }
+
+  .item-pre {
+    /* Box Model */
+    display: flex;
+    align-items: center;
+    width: 25px;
+  }
+
+  .item-trash {
+    color: #ff0000;
+
+    cursor: pointer;
+  }
+}
+
+.item-title,
+%item-title {
+  /* Typography */
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+
+  &--standalone {
+    padding: 10px 14px;
+
+    text-align: center;
+  }
+
+  &--primary {
+    color: #1d2c6f;
+  }
+
+  &--graytext {
+    color: #9b9b9b;
+  }
+}
+
+.item-subtitle {
+  @extend %item-title;
+  font-size: 16px;
+
+}
+
+.item-hint {
+  /* Typography */
+  color: #9b9b9b;
+  font-size: 14px;
+}
+
+.choose-items__modal-body {
+  // max-height: calc(100vh - 250px);
+
+  overflow-y: auto;
+}
+
+.item-selected {
+  padding: calc(0.5rem - 1px) calc(0.5rem - 1px) calc(0.5rem - 1px) calc(1rem - 1px) !important;
+
+  border: solid $primary 1px;
+}
+
+

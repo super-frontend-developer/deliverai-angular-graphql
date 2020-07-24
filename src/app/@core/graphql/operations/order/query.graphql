@@ -1,0 +1,250 @@
+query Order(
+    $id: ID!
+) {
+    order(id: $id) {
+        id
+        customerName
+        customer {
+            id
+            phoneNumber {
+                countryCode
+                nationalNumber
+            }
+            names
+        }
+        delivery {
+            ... on OrderCourierDelivery {
+                __typename
+            }
+            ... on OrderPickupDelivery {
+                __typename
+            }
+        }
+        payment {
+            ... on OrderOnlinePayment {
+                id
+                order {
+                    id
+                    customerName
+                }
+                amount
+                currency {
+                    code
+                }
+            }
+            ...on OrderOfflinePayment {
+                id
+                order {
+                    id
+                    customerName
+                }
+                amount
+                currency {
+                    code
+                }
+                type
+                state
+            }
+        }
+        createdAt
+    }
+}
+
+query BusinessOrderConnection(
+    $id: ID!
+) {
+    business(id: $id) {
+        orderConnection {
+            edges {
+                node {
+                    id
+                    customerName
+                    customer {
+                        id
+                        phoneNumber {
+                            countryCode
+                            nationalNumber
+                        }
+                        names
+                    }
+                    delivery {
+                        ... on OrderCourierDelivery {
+                            __typename
+                            address {
+                                addressLine1
+                            }
+                        }
+                        ... on OrderPickupDelivery {
+                            __typename
+                            store {
+                                id
+                                name
+                                address {
+                                    country
+                                    city
+                                    addressLine1
+                                    addressLine2
+                                }
+                            }
+                        }
+                    }
+                    payment {
+                        ... on OrderOnlinePayment {
+                            id
+                            order {
+                                id
+                                customerName
+                            }
+                            amount
+                            currency {
+                                code
+                            }
+                        }
+                        ...on OrderOfflinePayment {
+                            id
+                            order {
+                                id
+                                customerName
+                            }
+                            amount
+                            currency {
+                                code
+                            }
+                            type
+                            state
+                        }
+                    }
+                    fulfillment {
+                        id
+                        state
+                    }
+                    createdAt
+                }
+            }
+        }
+    }
+}
+
+query StoreOrderConnection(
+    $id: ID!
+) {
+    store(id: $id) {
+        orderFlow {
+            id
+            inputQueue {
+                id
+                name
+                orderConnection {
+                    totalCount
+                }
+            }
+            intermediateQueues {
+                id
+                name
+                orderConnection {
+                    totalCount
+                }
+            }
+            outputQueue {
+                id
+                name
+                orderConnection {
+                    totalCount
+                }
+            }
+        }
+        orderConnection {
+            edges {
+                node {
+                    id
+                    customerName
+                    customer {
+                        id
+                        phoneNumber {
+                            countryCode
+                            nationalNumber
+                        }
+                        names
+                    }
+                    delivery {
+                        ... on OrderCourierDelivery {
+                            __typename
+                            fee
+                            address {
+                                addressLine1
+                            }
+                        }
+                        ... on OrderPickupDelivery {
+                            __typename
+                        }
+                    }
+                    payment {
+                        ... on OrderOnlinePayment {
+                            id
+                            order {
+                                id
+                                customerName
+                            }
+                            amount
+                            currency {
+                                code
+                            }
+                        }
+                        ...on OrderOfflinePayment {
+                            id
+                            order {
+                                id
+                                customerName
+                            }
+                            amount
+                            currency {
+                                code
+                            }
+                            type
+                            state
+                        }
+                    }
+                    productConnection {
+                        edges {
+                            node {
+                                id
+                                name
+                                price
+                                quantity
+                                modifierConnection {
+                                    edges {
+                                        node {
+                                            id
+                                            name
+                                            optionConnection {
+                                                edges {
+                                                    node {
+                                                       id
+                                                       name
+                                                       price
+                                                       quantity
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    fulfillment {
+                        id
+                        queue {
+                            id
+                            name
+                        }
+                        state
+                        eta
+                    }
+                    comment
+                    createdAt
+                }
+            }
+        }
+    }
+}

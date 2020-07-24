@@ -1,0 +1,33 @@
+:host {
+  .plans-pricing-content {
+    background-color: #ffffff;
+  }
+
+  span {
+    display: block;
+
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  @media (max-width: 992px) {
+    .plans-pricing-content {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .plans-pricing-content {
+      width: 500px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .plans-pricing-content {
+      span,
+      button {
+        font-size: 13px;
+      }
+    }
+  }
+}

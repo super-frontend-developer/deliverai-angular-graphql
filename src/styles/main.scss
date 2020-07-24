@@ -1,0 +1,64 @@
+@charset 'utf-8';
+
+//
+// Description:
+//
+//    Read more about directory structure here:
+//    https://medium.com/@aaronverones/using-the-7-1-sass-scss-pattern-with-angular-7-bb210c015dcc
+//    and here: https://sass-guidelin.es/
+//
+
+// Configuration and helpers
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'abstracts/functions';
+@import 'abstracts/placeholders';
+
+// Vendors extensions
+@import 'vendors-extensions/bootstrap';
+
+// Vendors
+@import 'vendors/angled-edges';
+@import 'vendors/bootstrap';
+@import 'vendors/bourbon';
+@import 'vendors/fontawesome';
+@import 'vendors/spinkit';
+@import 'vendors/typesettings';
+
+// Base stuff
+@import 'base/base';
+@import 'base/fonts';
+@import 'base/helpers';
+@import 'base/reset';
+@import 'base/typography';
+
+// Components
+@import 'components/buttons';
+@import 'components/tables';
+@import 'components/panels';
+@import 'components/forms';
+@import 'components/card';
+
+
+// Themes
+@import 'themes/light';
+
+// Shame file
+@import 'shame';
+
+@import 'pages/home';
+@import 'pages/orders';
+@import 'pages/menu';
+@import 'pages/catalogs';
+@import 'pages/dashboard';
+@import 'pages/crm';
+@import 'pages/modifiers-list';
+@import 'pages/create-item';
+@import 'pages/create-business-store';
+@import 'pages/business-store';
+@import 'pages/login';
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~ngx-ui-switch/ui-switch.component.css';
+
+

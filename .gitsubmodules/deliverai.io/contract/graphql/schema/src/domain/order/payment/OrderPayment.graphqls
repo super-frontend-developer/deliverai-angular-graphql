@@ -1,0 +1,35 @@
+################################################################################
+##                                                                            ##
+##                                   TYPES                                    ##
+##                                                                            ##
+################################################################################
+
+"""Order payment."""
+interface OrderPayment {
+    """ID."""
+    id: ID!
+
+    """Order."""
+    order: Order!
+
+    """Amount."""
+    amount: BigFloat!
+
+    """Currency."""
+    currency: CurrencyDetails!
+}
+
+################################################################################
+##                                                                            ##
+##                                   INPUTS                                   ##
+##                                                                            ##
+################################################################################
+
+"""Set order payment input."""
+input SetOrderPayment {
+    """Offline payment."""
+    offline: SetOrderOfflinePayment
+
+    """Online payment."""
+    online: SetOrderOnlinePayment
+}

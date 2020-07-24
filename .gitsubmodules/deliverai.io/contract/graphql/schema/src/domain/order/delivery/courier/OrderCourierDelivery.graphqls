@@ -1,0 +1,35 @@
+################################################################################
+##                                                                            ##
+##                                   TYPES                                    ##
+##                                                                            ##
+################################################################################
+
+"""Order courier delivery."""
+type OrderCourierDelivery implements Node & OrderDelivery {
+    """ID."""
+    id: ID!
+
+    """Order."""
+    order: Order!
+
+    """Fee."""
+    fee: BigFloat!
+
+    """Address."""
+    address: OrderCourierDeliveryAddress!
+}
+
+################################################################################
+##                                                                            ##
+##                                   INPUTS                                   ##
+##                                                                            ##
+################################################################################
+
+"""Set order courier delivery input."""
+input SetOrderCourierDelivery {
+    """Address."""
+    address: SetOrderCourierDeliveryAddressInput!
+
+    """Delivery zone ID."""
+    deliveryZone: ID!
+}

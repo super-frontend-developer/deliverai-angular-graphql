@@ -1,0 +1,482 @@
+mutation CreateStore(
+    $business: ID!
+    $name: String!
+    $longContent: String
+    $shortContent: String
+    $timeZone: TimeZoneId!
+    $image: Upload
+) {
+    createStore(
+        input: {
+            business: $business,
+            name: $name,
+            description: {
+                longContent: $longContent,
+                shortContent: $shortContent
+            },
+            timeZone: $timeZone,
+            image: $image
+        }
+    ) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        address {
+            id
+            country
+            city
+            addressLine1
+            addressLine2
+        }
+        createdAt
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+        image
+    }
+}
+
+mutation UpdateStore(
+    $id: ID!
+    $name: String
+    $longContent: String
+    $shortContent: String
+    $timeZone: TimeZoneId,
+    $deliveryEnabled: Boolean,
+    $pickupEnabled: Boolean,
+    $deliveryEta: PositiveInt,
+    $pickupEta: PositiveInt
+) {
+    updateStore(
+        input: {
+            id: $id,
+            name: $name,
+            description: {
+                longContent: $longContent,
+                shortContent: $shortContent
+            },
+            timeZone: $timeZone,
+            deliveryEnabled: $deliveryEnabled,
+            pickupEnabled: $pickupEnabled,
+            deliveryEta: $deliveryEta,
+            pickupEta: $pickupEta
+        }
+    ) {
+        id
+        name
+        description {
+            longContent
+            shortContent
+        }
+        address {
+            id
+            country
+            city
+            addressLine1
+            addressLine2
+        }
+        createdAt
+        createdBy {
+            id
+            name {
+                given
+                family
+            }
+        }
+        image
+    }
+}
+
+mutation DeleteStore(
+    $id: ID!
+) {
+    deleteStore(
+        input: {
+            id: $id
+        }
+    )
+}
+
+mutation CreateStoreAddress(
+    $store: ID!
+    $country: String!
+    $city: String!
+    $addressLine1: String!
+    $addressLine2: String
+) {
+    createStoreAddress(
+        input: {
+            store: $store,
+            country: $country,
+            city: $city,
+            addressLine1: $addressLine1,
+            addressLine2: $addressLine2
+        }
+    ) {
+        store {
+            id
+            name
+        }
+        country
+        city
+        addressLine1
+        addressLine2
+    }
+}
+
+mutation UpdateStoreAddress(
+    $id: ID!
+    $country: String!
+    $city: String!
+    $addressLine1: String!
+    $addressLine2: String
+) {
+    updateStoreAddress(
+        input: {
+            id: $id,
+            country: $country,
+            city: $city,
+            addressLine1: $addressLine1,
+            addressLine2: $addressLine2
+        }
+    ) {
+        store {
+            id
+            name
+        }
+        country
+        city
+        addressLine1
+        addressLine2
+    }
+}
+
+mutation DeleteStoreAddress(
+    $id: ID!
+) {
+    deleteStoreAddress(
+        input: {
+            id: $id
+        }
+    )
+}
+
+mutation SetStoreWorkingHours(
+    $store: ID!
+    $daysOfWeek: [StoreWorkingHoursDayOfWeek!]!
+    $from: Time!
+    $to: Time!
+) {
+    setStoreWorkingHours(
+        input: {
+            store: $store,
+            daysOfWeek: $daysOfWeek,
+            timePeriods: [{
+                from: $from,
+                to: $to
+            }]
+        }
+    ) {
+        dayOfWeek
+        timePeriods {
+            from
+            to
+        }
+    }
+}
+
+mutation DeleteStoreWorkingHours(
+    $store: ID!
+    $daysOfWeek: [StoreWorkingHoursDayOfWeek!]!
+) {
+    deleteStoreWorkingHours(
+        input: {
+            store: $store,
+            daysOfWeek: $daysOfWeek,
+        }
+    )
+}
+
+mutation SetDeliveryHours(
+    $store: ID!
+    $daysOfWeek: [DeliveryHoursDayOfWeek!]!
+    $from: Time!
+    $to: Time!
+) {
+    setDeliveryHours(
+        input: {
+            store: $store,
+            daysOfWeek: $daysOfWeek,
+            timePeriods: [{
+                from: $from,
+                to: $to
+            }]
+        }
+    ) {
+        dayOfWeek
+        timePeriods {
+            from
+            to
+        }
+    }
+}
+
+mutation DeleteDeliveryHours(
+    $store: ID!
+    $daysOfWeek: [DeliveryHoursDayOfWeek!]!
+) {
+    deleteDeliveryHours(
+        input: {
+            store: $store,
+            daysOfWeek: $daysOfWeek,
+        }
+    )
+}
+
+mutation SetPickupHours(
+    $store: ID!
+    $daysOfWeek: [PickupHoursDayOfWeek!]!
+    $from: Time!
+    $to: Time!
+) {
+    setPickupHours(
+        input: {
+            store: $store,
+            daysOfWeek: $daysOfWeek,
+            timePeriods: [{
+                from: $from,
+                to: $to
+            }]
+        }
+    ) {
+        dayOfWeek
+        timePeriods {
+            from
+            to
+        }
+    }
+}
+
+mutation DeletePickupHours(
+    $store: ID!
+    $daysOfWeek: [PickupHoursDayOfWeek!]!
+) {
+    deletePickupHours(
+        input: {
+            store: $store,
+            daysOfWeek: $daysOfWeek,
+        }
+    )
+}
+
+mutation CreateDeliveryZone(
+    $store: ID!
+    $name: String
+    $minimalAmount: BigFloat
+    $fee:BigFloat
+) {
+    createDeliveryZone(
+        input: {
+            store:$store,
+            name: $name,
+            minimalAmount: $minimalAmount,
+            fee: $fee
+        }
+    ) {
+        id
+        store {
+            id
+            name
+        }
+        name
+        minimalAmount
+        fee
+    }
+}
+
+mutation UpdateDeliveryZone(
+    $id: ID!
+    $name: String
+    $minimalAmount: BigFloat
+    $fee: BigFloat
+) {
+    updateDeliveryZone(
+        input: {
+            id: $id,
+            name: $name,
+            minimalAmount: $minimalAmount,
+            fee: $fee
+        }
+    ) {
+        id
+        store {
+            id
+            name
+        }
+        name
+        minimalAmount
+        fee
+    }
+}
+
+mutation DeleteDeliveryZone(
+    $id: ID!
+) {
+    deleteDeliveryZone(
+        input: {
+            id: $id
+        }
+    )
+}
+
+mutation CreateCircleDeliveryZoneArea(
+    $deliveryZone: ID!
+    $latitude: BigFloat!
+    $longitude: BigFloat!
+    $cornerLat: BigFloat!
+    $cornerLng: BigFloat!
+) {
+    createCircleDeliveryZoneArea(
+        input: {
+            deliveryZone:$deliveryZone,
+            center:{
+                latitude: $latitude,
+                longitude: $longitude
+            },
+            corner: {
+                latitude: $cornerLat,
+                longitude: $cornerLng
+            }
+        }
+    ) {
+        id
+        deliveryZone {
+            id
+            name
+            minimalAmount
+            fee
+        }
+        center {
+            latitude
+            longitude
+        }
+        corner {
+            latitude
+            longitude
+        }
+    }
+}
+
+mutation UpdateCircleDeliveryZoneArea(
+    $id: ID!
+    $latitude: BigFloat!
+    $longitude: BigFloat!
+    $cornerLat: BigFloat!
+    $cornerLng: BigFloat!
+) {
+    updateCircleDeliveryZoneArea(
+        input: {
+            id: $id,
+            center: {
+                latitude: $latitude,
+                longitude: $longitude
+            },
+            corner: {
+                latitude: $cornerLat,
+                longitude: $cornerLng
+            }
+        }
+    ) {
+        id
+        deliveryZone {
+            id
+            name
+            minimalAmount
+            fee
+        }
+        center {
+            latitude
+            longitude
+        }
+        corner {
+            latitude
+            longitude
+        }
+    }
+}
+
+mutation DeleteCircleDeliveryZoneArea(
+    $id: ID!
+) {
+    deleteCircleDeliveryZoneArea(
+        input: {
+            id: $id
+        }
+    )
+}
+
+mutation CreateShapeDeliveryZoneArea(
+    $deliveryZone: ID!
+    $points: [SetLatLngInput!]!
+) {
+    createShapeDeliveryZoneArea(
+        input: {
+            deliveryZone: $deliveryZone,
+            points: $points
+        }
+    ) {
+        id
+        deliveryZone {
+            id
+            name
+            minimalAmount
+            fee
+        }
+        points {
+            latitude
+            longitude
+        }
+    }
+}
+
+mutation UpdateShapeDeliveryZoneArea(
+    $id: ID!
+    $points: [SetLatLngInput!]!
+) {
+    updateShapeDeliveryZoneArea(
+        input: {
+            id: $id,
+            points: $points
+        }
+    ) {
+        id
+        deliveryZone {
+            id
+            name
+            minimalAmount
+            fee
+        }
+        points {
+            latitude
+            longitude
+        }
+    }
+}
+
+mutation DeleteShapeDeliveryZoneArea(
+    $id: ID!
+) {
+    deleteShapeDeliveryZoneArea(
+        input: {
+            id: $id
+        }
+    )
+}
+

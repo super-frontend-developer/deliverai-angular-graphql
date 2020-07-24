@@ -1,0 +1,119 @@
+<header class="header d-block d-sm-block d-md-none">
+  <div class="d-flex align-items-center justify-content-between h-100">
+    <h1>Modifiers Lists</h1>
+    <div class="d-flex align-items-center">
+      <app-business-store-dropdown></app-business-store-dropdown>
+    </div>
+  </div>
+</header>
+
+<div class="d-md-flex d-sm-none d-none">
+  <div style="width: 90%;">
+    <header class="flex-wrap header">
+      <div class="row w-100">
+        <div class="col-lg-3 col-md-12">
+          <h1>Modifiers Lists</h1>
+        </div>
+        <div class="col-lg-9 col-md-12 d-flex align-items-center">
+          <div class="modifier-list-top-bar w-100">
+            <ng-container *ngTemplateOutlet="modifierListTopBar"></ng-container>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="d-flex align-items-center pl-2" style="width: 10%; border-bottom: solid #d8d8d8 1px; border-left: solid #d8d8d8 1px;">
+    <app-business-store-dropdown></app-business-store-dropdown>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="mobile-modifier-list-top-bar w-100 mb-3">
+    <ng-container *ngTemplateOutlet="modifierListTopBar"></ng-container>
+  </div>
+  <div class="mat-elevation-z8 data-table m-0">
+    <table class="table general-box table-v-middle box-box order-list">
+
+      <thead>
+      <tr>
+        <th [ngClass]="lg">NAME</th>
+        <th [ngClass]="lg">DISPLAY NAME</th>
+        <th class="pl-3 pr-2 pt-2 pb-2" [ngClass]="sm">NAME</th>
+        <th class="text-center" [ngClass]="lg">TYPE</th>
+        <th class="pl-2 pr-2 pt-2 pb-2" [ngClass]="sm">TYPE</th>
+        <th class="text-center" [ngClass]="lg">MODIFIERS ATTACHED</th>
+        <th class="text-center" [ngClass]="lg">MIN SELECTION</th>
+        <th class="text-center" [ngClass]="lg">MAX SELECTION</th>
+        <th class="pl-2 pr-2 pt-2 pb-2" [ngClass]="sm"></th>
+        <th [ngClass]="lg">CREATED AT</th>
+        <!-- <th>&nbsp;</th> -->
+        <th class="text-right" [ngClass]="sm"><div class="nav-item__icon"><i class="fas fa-plus-circle" style="font-size: 16px;"></i></div></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let x of [0,1,2,3,4]">
+        <td [ngClass]="lg">Flavor</td>
+        <td [ngClass]="lg">Flavor</td>
+        <td class="pl-3 pr-2 pt-2 pb-2" [ngClass]="sm">
+          <div class="text-primary mb-1">Flavor</div>
+          <div class="text-secondary">Flavor</div>
+        </td>
+        <td [ngClass]="lg" class="text-center">Single</td>
+        <td class="pl-2 pr-2 pt-2 pb-2" [ngClass]="sm">
+          <div class="text-primary mb-1">Single</div>
+          <div class="text-secondary">12 Jun 2020</div>
+        </td>
+        <td [ngClass]="lg" class="text-center">1</td>
+        <td [ngClass]="lg" class="text-center">1</td>
+        <td [ngClass]="lg" class="text-center">5</td>
+        <td class="pl-2 pr-2 pt-2 pb-2" [ngClass]="sm">
+          <div class="text-primary text-nowrap mb-1">Mod: 1</div>
+          <div class="text-warning">Sel: 1-5</div>
+        </td>
+        <td [ngClass]="lg">12 Jun 2020</td>
+        <td class="text-right text-nowrap">
+          <a [routerLink]="['..', 'modifiers-detail']" class="border border-primary rounded pt-2 pb-2 pl-4 pr-4 ml-3 align-self-center d-md-inline-block d-none" >View</a>
+          <div class="ml-3 align-self-center d-inline-block d-md-none" [routerLink]="['..', 'modifiers-detail']"><i class="fas fa-eye text-primary"></i></div>
+          <div class="mx-3 align-self-center d-inline-block"><i class="fas fa-trash-alt text-danger"></i></div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination [collectionSize]="40" [page]="1" aria-label="Default pagination"></ngb-pagination>
+  </div>
+</div>
+
+<ng-template #modifierListTopBar>
+  <div class="row">
+    <div class="col-md-4 col-sm-12 col-12">
+      <div class="btn-group btn-group-toggle w-100 mt-1 mb-1" ngbRadioGroup name="type" [(ngModel)]="type">
+        <label class="btn-outline-primary shadow-none" ngbButtonLabel>
+          <input type="radio" ngbButton value="all"> All
+        </label>
+        <label class="btn-outline-primary shadow-none" ngbButtonLabel>
+          <input type="radio" ngbButton value="single"> Single
+        </label>
+        <label class="btn-outline-primary shadow-none" ngbButtonLabel>
+          <input type="radio" ngbButton value="multiple"> Multiple
+        </label>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+      <div class="form-control-prepend mt-1 mb-1">
+        <span class="prepend-item"><i class="fas fa-search"></i></span>
+        <input class="form-control" type="text" placeholder="Search">
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-12 d-md-block d-none">
+      <div class="text-right mt-1 mb-1">
+        <button class="btn btn-primary pl-4 pr-4">Create</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

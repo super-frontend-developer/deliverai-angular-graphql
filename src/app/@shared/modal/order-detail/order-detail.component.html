@@ -1,0 +1,105 @@
+<div class="active-order d-block d-sm-block d-md-none w-100">
+
+  <button type="button" class="close close-button mr-2" style="margin-top: 2px;" aria-label="Close" (click)="modalClose()">
+    <span class="text-white" aria-hidden="true">&times;</span>
+  </button>
+
+  <div class="active-order__time" style="height: 30px;"><i class="fas fa-clock" style="color: #fff !important;"></i> 5 minutes ago</div>
+
+  <table class="table table-borderless active-order__table mb-0" style="border-left: solid #b8e986 1px;">
+    <tbody>
+    <tr class="active-order__table--underlined">
+      <td class="active-order__property">Order Id:</td><td>#452944</td><td class="text-right"><span class="active-order__property">Cost:</span> 45 AED</td>
+    </tr>
+
+    <tr>
+      <td class="active-order__property">Date:</td>
+      <td class="active-order__property" colspan="2">14th Jan, 3:00 am</td>
+    </tr>
+
+    <tr>
+      <td class="active-order__property">Name:</td>
+      <td colspan="2">John Doe</td>
+    </tr>
+
+    <tr>
+      <td class="active-order__property">Phone:</td>
+      <td colspan="2">+912 233 2323</td>
+    </tr>
+
+    <tr>
+      <td class="active-order__property">Address:</td>
+      <td colspan="2">24 Crescent Street, Palm Jumeriah, Dubai 435 234</td>
+    </tr>
+
+    <tr>
+      <td class="active-order__property">Delivery:</td>
+      <td colspan="2"><span class="bg-primary text-white pt-1 pb-1 pl-2 pr-2" style="border-radius: 9px;">Pick Up</span></td>
+    </tr>
+
+    <tr class="active-order__table--underlined">
+      <td class="active-order__property">Payment:</td>
+      <td colspan="2"><span class="text-white pt-1 pb-1 pl-3 pr-3" style="border-radius: 9px; background-color: #2fe039">Card</span></td>
+    </tr>
+
+    <tr class="active-order__table--underlined">
+      <td class="active-order__property" colspan="3">Ordered items:</td>
+    </tr>
+
+    <tr class="active-order__table--underlined">
+      <td colspan="3">
+        <div class="active-order__item">
+          <div class="active-order__item_name">1) 1 X Pizza Margarita</div>
+          <div class="active-order__item_price">10 AED</div>
+        </div>
+        <div class="active-order__item">
+          <div class="pl-2 active-order__item_name">Size: Large</div>
+        </div>
+        <div class="active-order__item">
+          <div class="active-order__item_name">Addons:</div>
+        </div>
+        <div class="active-order__item">
+          <div class="pl-2 active-order__item_name">Ketchup</div>
+          <div class="active-order__item_price">5 AED</div>
+        </div>
+        <div class="active-order__item">
+          <div class="pl-2 active-order__item_name">Extra Cheese</div>
+          <div class="active-order__item_price">5 AED</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr class="active-order__table--underlined">
+      <td colspan="3">
+        <div class="active-order__item">
+          <div class="active-order__item_name">2) 2 X Diet Coke</div>
+          <div class="active-order__item_price">5 AED</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr class="active-order__table--underlined">
+      <td colspan="3">
+        <div class="active-order__item">
+          <div class="active-order__item_name">3) French Fries</div>
+          <div class="active-order__item_price">10 AED</div>
+        </div>
+        <div class="active-order__item">
+          <div class="pl-2 active-order__item_name">Size: Medium</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr class="active-order__table--underlined">
+      <td colspan="3">
+        <div class="d-flex">
+          <button class="btn btn-outline-danger flex-grow-1 mr-1" (click)="reject()">Reject</button>
+          <button class="btn btn-warning flex-grow-1 ml-1 text-white" (click)="accept()">Accept</button>
+        </div>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+
+</div>
